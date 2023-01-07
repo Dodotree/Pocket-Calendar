@@ -1,0 +1,14 @@
+const myDocument = app.activeDocument;
+var imgLayer = myDocument.layers.add({name:"Image"});
+//imgLayer.move(LocationOptions.AT_BEGINNING);
+imgLayer.move(LocationOptions.AT_END);
+const imagePath = "C:\\Users\\Ooo\\Desktop\\6490698241_1.jpg"
+//const imagePath = "C:\\Users\\Ooo\\AppData\\Local\\Temp\\Adobe\\UXP\\PluginsStorage\\IDSN\\18\\Developer\\10016\\PluginDatarunning_a_script.webp"
+const imageFrame = myDocument.rectangles.add();
+imageFrame.geometricBounds = ["32pt", "30pt", "1345pt", "926pt"];
+//imageFrame.geometricBounds = [12.7,12.7,100,100];
+imageFrame.place(imagePath);
+//imageFrame.fit(FitOptions.CONTENT_AWARE_FIT);
+imageFrame.fit(FitOptions.FRAME_TO_CONTENT);
+imageFrame.itemLayer = imgLayer
+

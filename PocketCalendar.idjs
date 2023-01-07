@@ -1,0 +1,254 @@
+//An InDesign UXPScript
+
+
+var myDocument = app.documents.add()
+myDocument.name = "Pocket Calendar 2023"
+myDocument.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS
+myDocument.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS
+myDocument.documentPreferences.properties = {pageWidth: 1000, pageHeight: 1800}
+
+var options = {
+  locale: 'ru-Ru', /* default */
+  weekBeginsAnMonday: true,
+  weekColsWidth: "55.5pt",
+  monthNameRowWidth: "252pt",
+  monthNameRowHeight: "48pt",
+  monthRowHeight: "236pt",
+  middleRowHeight: "156pt",
+  tableBorderWeight: "4pt", 
+  daysNarrowWidth: "26pt",
+  month5Width: "220pt",
+  month6Width: "264pt",
+}
+
+var dayFontStyle = myDocument.paragraphStyles.add({
+  name:"Day Font",
+  appliedFont: "Neue Haas Unica W1G",
+  fontStyle: "Medium",
+  pointSize: 30, /* leading 36 */
+  justification: Justification.RIGHT_ALIGN
+});
+
+var weekFontStyle = myDocument.paragraphStyles.add({
+  name:"Week Font",
+  appliedFont: "Neue Haas Unica W1G",
+  fontStyle: "Medium",
+  pointSize: 28,
+  justification: Justification.LEFT_ALIGN
+});
+
+var monthFontStyle = myDocument.paragraphStyles.add({
+  name:"Month Font",
+  appliedFont: "Neue Haas Unica W1G",
+  fontStyle: "Medium",
+  pointSize: 27,
+  justification: Justification.CENTER_ALIGN
+});
+
+var dayRedFontStyle = myDocument.paragraphStyles.add({
+  name:"Day Red Font",
+  basedOn: dayFontStyle,
+  fillColor: myDocument.colors.item(4)
+});
+
+var dayCellStyle = myDocument.cellStyles.add({
+  name:"Day Cell",
+  appliedParagraphStyle: dayFontStyle,
+  textTopInset: "1px",
+  textRightInset: "4pt",
+  textBottomInset: "7pt",
+  textLeftInset: "4pt",
+  verticalJustification: VerticalJustification.CENTER_ALIGN
+})
+
+var weekDayCellStyle = myDocument.cellStyles.add({
+  name:"Week Day Names Cell",
+  basedOn: dayCellStyle,
+  appliedParagraphStyle: weekFontStyle,
+  textTopInset: "4px",
+  textBottomInset: "4pt",
+})
+
+var yearCellStyle = myDocument.cellStyles.add({
+  name:"Year Cell",
+  basedOn: dayCellStyle,
+  appliedParagraphStyle: monthFontStyle,
+  textTopInset: 0,
+  textRightInset: 0,
+  textBottomInset: 0,
+})
+
+var monthNameCellStyle = myDocument.cellStyles.add({
+  name:"Month Name Cell",
+  basedOn: yearCellStyle,
+  appliedParagraphStyle: monthFontStyle,
+})
+
+var monthCellStyle = myDocument.cellStyles.add({
+  name:"Month Cell",
+  basedOn: yearCellStyle,
+  textTopInset: "8px",
+})
+
+var weekCellStyle = myDocument.cellStyles.add({
+  name:"Week Cell",
+  basedOn: yearCellStyle,
+})
+
+var moTableStyle = myDocument.tableStyles.add({
+  name:"Month Table Style",
+  bodyRegionCellStyle: dayCellStyle,
+  spaceBefore: 0,
+  spaceAfter: 0,
+  leftBorderStrokeWeight: 0,
+  topBorderStrokeWeight: 0,
+  rightBorderStrokeWeight: 0,
+  bottomBorderStrokeWeight: 0,
+  startColumnStrokeCount: 1,
+  endColumnStrokeCount: 1,
+  startRowStrokeRow: 1,
+  endRowStrokeCount: 1,
+  startColumnStrokeWeight:0,
+  endColumnStrokeWeight:0,
+  startRowStrokeWeight:0,
+  endRowStrokeWeight:0,
+})
+
+var weekTableStyle = myDocument.tableStyles.add({
+  name:"Week Table Style",
+  basedOn: moTableStyle,
+  bodyRegionCellStyle: weekDayCellStyle,
+})
+
+let bw = options.tableBorderWeight
+var yearTableStyle = myDocument.tableStyles.add({
+  name:"Year Table Style",
+  bodyRegionCellStyle: yearCellStyle,
+  spaceBefore: 0,
+  spaceAfter: 0,
+  leftBorderStrokeWeight: bw,
+  topBorderStrokeWeight: bw,
+  rightBorderStrokeWeight: bw,
+  bottomBorderStrokeWeight: bw,
+  startColumnStrokeCount: 1,
+  endColumnStrokeCount: 1,
+  startRowStrokeRow: 1,
+  endRowStrokeCount: 1,
+  startColumnStrokeWeight: bw,
+  endColumnStrokeWeight: bw, 
+  startRowStrokeWeight: bw, 
+  endRowStrokeWeight: bw,
+})
+let colsRows = setColsRowsOrder(options.weekColsWidth, options.monthNameRowWidth, options.monthRowHeight, options.monthNameRowHeight, options.middleRowHeight)
+
+/***** Structural part (mostly) *****/
+var myTextFrame = myDocument.pages.item(0).textFrames.add({geometricBounds: ["36pt", "36pt", "1400pt", "940pt"]});
+
+var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
+  appliedTableStyle: yearTableStyle,
+  bodyRowCount : 9,
+  columnCount : 5
+});
+
+let weekList = getShortWeekDayNames(options.locale, options.weekBeginsAnMonday);
+
+[0,4].forEach((col)=>{
+  [1,3,6,8].forEach((row)=>{
+    let weekCell = yearTable.columns.item(col).cells.item(row)
+    weekCell.appliedCellStyle = weekCellStyle
+    weekCell.tables.add({
+      appliedTableStyle: weekTableStyle,
+      bodyRowCount : 7,
+      columnCount : 1,
+      width: options.weekColsWidth,
+      contents: weekList
+    });
+  })
+})
+
+var d= new Date(1989, 0, 1)
+var year = d. getFullYear()
+
+while (year == d. getFullYear()) {
+  let mo = d.getMonth()
+  let moName = d.toLocaleString(options.locale, { month: 'long' })
+
+  let yearTableCol = mo%3 + 1
+  let yearTableRow = Math.floor(mo/3)
+  yearTableRow = (yearTableRow < 2) ? 2*yearTableRow : 2*yearTableRow + 1
+
+  let firstDayShift = d.getDay() - 1
+  let days = [];
+  while (mo==d.getMonth()) {
+    let dt = d.getDate()
+    days[d.getDay()+ 7*Math.floor((dt+firstDayShift)/7)] = dt
+    d.setDate(dt + 1)
+  }
+
+  if( options.weekBeginsAnMonday ){
+    days.shift()
+    if(2 === days[0]){
+      days = [0,0,0,0,0,0,1, ...days]
+      firstDayShift = 6
+    }
+  }
+
+  let cols = Math.ceil(days.length/7)
+  let daysStr = []
+  for(let i=0; i < 7*cols; i++) {
+      let ind = cols*(i%7) + Math.floor(i/7)
+      daysStr[ind] = days[i] ? days[i].toString() : ''
+  }
+
+  let monthNameCell = yearTable.rows.item(yearTableRow).cells.item(yearTableCol)
+  monthNameCell.contents = moName.toLocaleUpperCase()
+  monthNameCell.appliedCellStyle = monthNameCellStyle
+
+  let monthCell = yearTable.rows.item(yearTableRow +1).cells.item(yearTableCol)
+  monthCell.appliedCellStyle = monthCellStyle
+  let moTable = monthCell.tables.add({
+          appliedTableStyle: moTableStyle,
+          bodyRowCount : 7,
+          columnCount : cols,
+          width : (cols < 6 )? options.month5Width : options.month6Width,
+          contents : daysStr
+      });   
+  moTable.columns.item(0).width = options.daysNarrowWidth;
+  if(firstDayShift > 4){
+    moTable.columns.item(1).width = options.daysNarrowWidth;
+  }
+}
+
+updateTableColsRows(colsRows, yearTable)
+// Doing merge here to avoid cell index recalculation while making the table 
+yearTable.rows.item(4).cells.item(0).merge(yearTable.rows.item(4).cells.item(4))
+
+function getShortWeekDayNames(loc, mondayFirstBool ){
+  let firstDayStr = mondayFirstBool ? "01/01/1973" : "07/01/1973"
+  var wkD = new Date(firstDayStr)
+  var week = []
+  for( let i=0; i<7; i++){
+    let wrd = wkD.toLocaleDateString('ru-Ru', { weekday: 'short' })
+    wrd = wrd.charAt(0).toUpperCase() +  (wrd.length > 1? wrd.slice(1) : '')
+    week.push(wrd)
+    wkD.setDate(wkD.getDate() + 1)
+  }
+  return week
+}
+function setColsRowsOrder(wW, moW, moH, moNH, miH){
+  return [[wW,moW,moW,moW,wW], [moNH,moH,moNH,moH,miH,moNH,moH,moNH,moH]]
+}
+function updateTableColsRows(cr,tbl){
+  let [yearCols, yearRows] = cr
+  for(let col=0; col < yearCols.length; col++){
+    if( yearCols[col] != '' ){
+      tbl.columns.item(col).width = yearCols[col]
+      console.log(col, yearCols[col])
+    }
+  }
+  for(let row=0; row < yearRows.length; row++){
+    if( yearRows[row] != '' ){
+      tbl.rows.item(row).height = yearRows[row]
+    }
+  }
+}
