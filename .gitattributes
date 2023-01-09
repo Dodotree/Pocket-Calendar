@@ -1,0 +1,3 @@
+*.idjs linguist-language=js
+*.idjs linguist-language=JS
+*.idjs linguist-language=JAVASCRIPT
