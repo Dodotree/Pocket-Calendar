@@ -1,15 +1,5 @@
 //An InDesign UXPScript
 
-function alert(msg) {
-  theDialog = app.dialogs.add();
-  col = theDialog.dialogColumns.add();
-  colText = col.staticTexts.add();
-  colText.staticLabel = "" + msg;
-  theDialog.canCancel = false;
-  theDialog.show();
-  theDialog.destroy();
-  return;
-}
 
 var myDocument = app.documents.add()
 myDocument.name = "Pocket Calendar 2023"
@@ -19,12 +9,12 @@ myDocument.documentPreferences.properties = {pageWidth: 1000, pageHeight: 1800}
 myDocument.colors.add({name:"Red", model: ColorModel.process, colorValue:[0,90,53,0]});
 
 var options = {
-  locale: 'uk-UA', /* default */
+  locale: 'en-US', /* default */
   weekBeginsAnMonday: true,
   year: 1989,
   year_table: {
     border: "4px",
-    colsW: { week : "55.5pt", mo: "252pt"},
+    colsW: { week : 55.5, mo: "252pt"},
     rowsH: { moName: "48pt", mo: "236pt", mid:"156pt"},
     order: {
       cols:["week", "mo", "mo", "mo", "week"],
@@ -70,7 +60,7 @@ var yearFontStyle = myDocument.paragraphStyles.add({
   justification: Justification.LEFT_ALIGN,
 });
 
-var dayRedFontStyle = myDocument.paragraphStyles.add({
+var dayHighlightFontStyle = myDocument.paragraphStyles.add({
   name:"Day Red Font",
   basedOn: dayFontStyle,
   fillColor: myDocument.colors.item("Red"),
@@ -84,6 +74,11 @@ var dayCellStyle = myDocument.cellStyles.add({
   textBottomInset: "7pt",
   textLeftInset: "5pt",
   verticalJustification: VerticalJustification.CENTER_ALIGN
+})
+
+var highlightDayCellStyle = myDocument.cellStyles.add({
+  name:"Highlight Day Cell",
+  appliedParagraphStyle: dayHighlightFontStyle,
 })
 
 var weekDayCellStyle = myDocument.cellStyles.add({
@@ -183,8 +178,10 @@ var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
 });
 
 let weekList = getShortWeekDayNames(options.locale, options.weekBeginsAnMonday);
-
 let weekW = measureColMinW(weekTableStyle, weekList, yearTable.cells.item(0));
+options.year_table.colsW.week = (options.year_table.colsW.week < weekW) ? weekW : options.year_table.colsW.week
+
+
 let numW = measureColMinW(moTableStyle, ['1','2','3','4','5','6','7','8','9','0'], yearTable.cells.item(0));
 let num2W = measureColMinW(moTableStyle, ['24', '30'], yearTable.cells.item(0));
 options.daysNarrowCol = numW
@@ -194,13 +191,14 @@ options.daysCol = num2W;
   [1,3,6,8].forEach((row)=>{
     let weekCell = yearTable.columns.item(col).cells.item(row)
     weekCell.appliedCellStyle = weekCellStyle
-    weekCell.tables.add({
+    let weekTbl = weekCell.tables.add({
       appliedTableStyle: weekTableStyle,
       bodyRowCount : 7,
       columnCount : 1,
       contents: weekList,
       width: weekW,
     });
+    weekTbl.rows.item(6).cells.item(0).texts.item(0).fillColor = myDocument.colors.item("Red")
   })
 })
 
@@ -263,6 +261,11 @@ while (year == d.getFullYear()) {
   }else{
     moTable.columns.item(1).width = options.daysCol;
   }
+
+  let lastRowCells = moTable.rows.item(6).cells.everyItem().getElements()
+  for(let ri=0; ri < cols; ri++){
+    lastRowCells[ri].appliedCellStyle = highlightDayCellStyle
+  } 
 }
 
 updateTableColsRows(options.year_table, yearTable)
@@ -279,7 +282,7 @@ function getShortWeekDayNames(loc, mondayFirstBool ){
   var wkD = new Date(firstDayStr)
   var week = []
   for( let i=0; i<7; i++){
-    let wrd = wkD.toLocaleDateString(loc, { weekday: 'short' })
+    let wrd = wkD.toLocaleDateString(loc, { weekday: 'short' }) // narrow, sort, long
     wrd = wrd.charAt(0).toUpperCase() +  (wrd.length > 1? wrd.slice(1) : '')
     week.push(wrd)
     wkD.setDate(wkD.getDate() + 1)
@@ -332,3 +335,13 @@ function measureColMinW(tblStyle, textLines, doc){
   return minColW  + rightInset + leftInset 
 }
 
+function alert(msg) {
+  let theDialog = app.dialogs.add();
+  let col = theDialog.dialogColumns.add();
+  let colText = col.staticTexts.add();
+  colText.staticLabel = "" + msg;
+  theDialog.canCancel = false;
+  theDialog.show();
+  theDialog.destroy();
+  return;
+}
