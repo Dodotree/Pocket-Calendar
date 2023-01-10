@@ -10,8 +10,8 @@ myDocument.colors.add({name:"Red", model: ColorModel.process, colorValue:[0,90,5
 
 var options = {
     locale: 'en-US', /* default */
-    weekBeginsAnMonday: true,
-    year: 1989,
+    weekBeginsAtMonday: true,
+    year: 2023,
     year_table: {
         border: "4px",
         colsW: { week : 55.5, mo: "252pt"},
@@ -28,7 +28,7 @@ var dayFontStyle = myDocument.paragraphStyles.add({
     appliedFont: "Neue Haas Unica W1G",
     fontStyle: "Medium",
     pointSize: 31, /* leading 36 */
-    justification: Justification.RIGHT_ALIGN
+    justification: Justification.RIGHT_ALIGN,
 });
 
 var weekFontStyle = myDocument.paragraphStyles.add({
@@ -36,7 +36,7 @@ var weekFontStyle = myDocument.paragraphStyles.add({
     appliedFont: "Neue Haas Unica W1G",
     fontStyle: "Bold",
     pointSize: 31,
-    justification: Justification.LEFT_ALIGN
+    justification: Justification.LEFT_ALIGN,
 });
 
 var monthFontStyle = myDocument.paragraphStyles.add({
@@ -51,11 +51,12 @@ var monthFontStyle = myDocument.paragraphStyles.add({
 
 var yearFontStyle = myDocument.paragraphStyles.add({
     name:"Year Font",
-    appliedFont: "Gravitas One",
-    pointSize: 162,
-    leading: 132,
+    appliedFont: "Abril fatface", //"Blenny" //"Gravitas One",
+    //fontStyle: "Black",
+    pointSize: 155, // 162,
+    leading: 131,
     kerningMethod: "Optical",
-    tracking: -70,
+    tracking: 0, // -70,
     fillColor: myDocument.colors.item("Red"),
     justification: Justification.LEFT_ALIGN,
 });
@@ -115,7 +116,8 @@ var middleCellStyle = myDocument.cellStyles.add({
     basedOn: yearCellStyle,
     appliedParagraphStyle: yearFontStyle,
     firstBaselineOffset: FirstBaseline.LEADING_OFFSET,
-    verticalJustification: VerticalJustification.JUSTIFY_ALIGN
+    verticalJustification: VerticalJustification.JUSTIFY_ALIGN,
+    textLeftInset: "16pt",
 });
 
 var weekCellStyle = myDocument.cellStyles.add({
@@ -177,7 +179,7 @@ var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
     columnCount : 5
 });
 
-let weekList = getShortWeekDayNames(options.locale, options.weekBeginsAnMonday);
+let weekList = getShortWeekDayNames(options.locale, options.weekBeginsAtMonday);
 let weekW = measureColMinW(weekTableStyle, weekList, yearTable.cells.item(0));
 options.year_table.colsW.week = (options.year_table.colsW.week < weekW) ? weekW : options.year_table.colsW.week;
 
@@ -203,9 +205,9 @@ options.daysCol = num2W;
 });
 
 var d= new Date(options.year, 0, 1);
-var year = d. getFullYear();
+const holidays = federalHolidaysYear(options.year);
 
-while (year == d.getFullYear()) {
+while (d.getFullYear() == options.year) {
     let mo = d.getMonth();
     let moName = d.toLocaleString(options.locale, { month: 'long' });
 
@@ -221,7 +223,7 @@ while (year == d.getFullYear()) {
         d.setDate(dt + 1);
     }
 
-    if( options.weekBeginsAnMonday ){
+    if( options.weekBeginsAtMonday ){
         days.shift();
         if(2 === days[0]){
             days = [0,0,0,0,0,0,1, ...days];
@@ -266,6 +268,12 @@ while (year == d.getFullYear()) {
     for(let ri=0; ri < cols; ri++){
         lastRowCells[ri].appliedCellStyle = highlightDayCellStyle;
     } 
+
+    alert(holidays[mo]);
+    for(let hi=0; hi < holidays[mo].length; hi++){
+        let dt = holidays[mo][hi] + firstDayShift - 1;
+        moTable.columns.item(Math.floor(dt/7)).cells.item(dt%7).appliedCellStyle = highlightDayCellStyle;
+    }
 }
 
 updateTableColsRows(options.year_table, yearTable);
@@ -275,7 +283,8 @@ let middleCell = yearTable.rows.item(4).cells.item(0);
 middleCell.appliedCellStyle = middleCellStyle;
 middleCell.contents = options.year.toString();
 
-/* Functions */
+
+/****  Functions *****/
 
 function getShortWeekDayNames(loc, mondayFirstBool ){
     let firstDayStr = mondayFirstBool ? "01/01/1973" : "07/01/1973";
@@ -333,6 +342,34 @@ function measureColMinW(tblStyle, textLines, doc){
         .reduce( (len1,len2) => Math.max(len1, len2),0);
     tbl.remove();
     return minColW  + rightInset + leftInset; 
+}
+
+function federalHolidaysYear(year){
+    /* Month counts from 0, week counts from Sunday 0, week day number in the month also from 0 */
+    /* "Last week day on the month" is the next month week day with num=-1 */  
+    var holidays = [{name: "New Year's Day", fixed: true, mo: 0, date: 1},
+        {name: "Birthday of Martin Luther King, Jr.", fixed: false, mo: 0, weekDay: 1, num: 2},
+        {name: "Washington's Birthday", fixed: false, mo: 1, weekDay: 1, num: 2},
+        {name: "Memorial Day", fixed: false, mo: 5, weekDay: 1, num: -1},
+        {name: "Juneteenth National Independence Day", fixed: true, mo: 5, date: 19},
+        {name: "Independence Day", fixed: true, mo: 6, date: 4 },
+        {name: "Labor Day", fixed: false, mo: 8, weekDay: 1, num: 0},
+        {name: "Columbus Day", fixed: false, mo: 9, weekDay: 1, num: 1 },
+        {name: "Veterans Day", fixed: true, mo: 10, date: 11 },
+        {name: "Thanksgiving Day", fixed: false, mo: 10, weekDay: 4, num: 3 },
+        {name: "Christmas Day", fixed: true, mo: 11, date: 25 }];
+
+    var months = Array(12).fill(0).map(x=>[]);
+    holidays.forEach(h=>{
+        if (h.fixed){
+            months[h.mo].push( h.date );
+        }else {
+            let dif = (7 + h.weekDay - new Date(year, h.mo, 0).getDay() ) % 7;
+            let dt = new Date(year, h.mo, dif + 7*h.num);
+            months[ dt.getMonth() ].push( dt.getDate() );
+        }
+    });
+    return months;
 }
 
 function alert(msg) {
