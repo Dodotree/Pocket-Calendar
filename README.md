@@ -9,3 +9,5 @@ ToDo:
 - [ ] dialogs for easier tuning: year, language, Sunday/Monday first, list of holidays
 - [ ] watching events and dealing with overflows after style changes
 - [ ] scaling down, making tiles for printing calendars on small cards and stickers.
+
+![calendar](https://github.com/Dodotree/Pocket-Calendar/blob/master/CaptureBlenny.JPG?raw=true)
