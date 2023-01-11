@@ -1,0 +1,2030 @@
+{
+    "af-NA": {
+        "name": "Afrikaans (Namibia)",
+        "format": "dd/MM/yyyy"
+    },
+    "af-ZA": {
+        "name": "Afrikaans (South Africa)",
+        "format": "yyyy/MM/dd"
+    },
+    "af": {
+        "name": "Afrikaans",
+        "format": "dd/MM/yyyy"
+    },
+    "ak-GH": {
+        "name": "Akan (Ghana)",
+        "format": "dd/MM/yyyy"
+    },
+    "ak": {
+        "name": "Akan",
+        "format": "dd/MM/yyyy"
+    },
+    "sq-AL": {
+        "name": "Albanian (Albania)",
+        "format": "yyyy-MM-dd"
+    },
+    "sq": {
+        "name": "Albanian",
+        "format": "dd/MM/yyyy"
+    },
+    "am-ET": {
+        "name": "Amharic (Ethiopia)",
+        "format": "d/M/yyyy"
+    },
+    "am": {
+        "name": "Amharic",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-DZ": {
+        "name": "Arabic (Algeria)",
+        "format": "dd-MM-yyyy"
+    },
+    "ar-BH": {
+        "name": "Arabic (Bahrain)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-EG": {
+        "name": "Arabic (Egypt)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-IQ": {
+        "name": "Arabic (Iraq)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-JO": {
+        "name": "Arabic (Jordan)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-KW": {
+        "name": "Arabic (Kuwait)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-LB": {
+        "name": "Arabic (Lebanon)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-LY": {
+        "name": "Arabic (Libya)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-MA": {
+        "name": "Arabic (Morocco)",
+        "format": "dd-MM-yyyy"
+    },
+    "ar-OM": {
+        "name": "Arabic (Oman)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-QA": {
+        "name": "Arabic (Qatar)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-SA": {
+        "name": "Arabic (Saudi Arabia)",
+        "format": "dd/MM/yy"
+    },
+    "ar-SD": {
+        "name": "Arabic (Sudan)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-SY": {
+        "name": "Arabic (Syria)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-TN": {
+        "name": "Arabic (Tunisia)",
+        "format": "dd-MM-yyyy"
+    },
+    "ar-AE": {
+        "name": "Arabic (United Arab Emirates)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar-YE": {
+        "name": "Arabic (Yemen)",
+        "format": "dd/MM/yyyy"
+    },
+    "ar": {
+        "name": "Arabic",
+        "format": "dd/MM/yyyy"
+    },
+    "hy-AM": {
+        "name": "Armenian (Armenia)",
+        "format": "dd.MM.yyyy"
+    },
+    "hy": {
+        "name": "Armenian",
+        "format": "dd/MM/yyyy"
+    },
+    "as-IN": {
+        "name": "Assamese (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "as": {
+        "name": "Assamese",
+        "format": "dd/MM/yyyy"
+    },
+    "asa-TZ": {
+        "name": "Asu (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "asa": {
+        "name": "Asu",
+        "format": "dd/MM/yyyy"
+    },
+    "az-Cyrl": {
+        "name": "Azerbaijani (Cyrillic)",
+        "format": "dd/MM/yyyy"
+    },
+    "az-Cyrl_AZ": {
+        "name": "Azerbaijani (Cyrillic, Azerbaijan)",
+        "format": "dd/MM/yyyy"
+    },
+    "az-Latn": {
+        "name": "Azerbaijani (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "az-Latn_AZ": {
+        "name": "Azerbaijani (Latin, Azerbaijan)",
+        "format": "dd/MM/yyyy"
+    },
+    "az": {
+        "name": "Azerbaijani",
+        "format": "dd/MM/yyyy"
+    },
+    "bm-ML": {
+        "name": "Bambara (Mali)",
+        "format": "dd/MM/yyyy"
+    },
+    "bm": {
+        "name": "Bambara",
+        "format": "dd/MM/yyyy"
+    },
+    "eu-ES": {
+        "name": "Basque (Spain)",
+        "format": "yyyy/MM/dd"
+    },
+    "eu": {
+        "name": "Basque",
+        "format": "dd/MM/yyyy"
+    },
+    "be-BY": {
+        "name": "Belarusian (Belarus)",
+        "format": "dd.MM.yyyy"
+    },
+    "be": {
+        "name": "Belarusian",
+        "format": "dd/MM/yyyy"
+    },
+    "bem-ZM": {
+        "name": "Bemba (Zambia)",
+        "format": "dd/MM/yyyy"
+    },
+    "bem": {
+        "name": "Bemba",
+        "format": "dd/MM/yyyy"
+    },
+    "bez-TZ": {
+        "name": "Bena (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "bez": {
+        "name": "Bena",
+        "format": "dd/MM/yyyy"
+    },
+    "bn-BD": {
+        "name": "Bengali (Bangladesh)",
+        "format": "dd-MM-yy"
+    },
+    "bn-IN": {
+        "name": "Bengali (India)",
+        "format": "dd-MM-yy"
+    },
+    "bn": {
+        "name": "Bengali",
+        "format": "dd/MM/yyyy"
+    },
+    "bs-BA": {
+        "name": "Bosnian (Bosnia and Herzegovina)",
+        "format": "dd/MM/yyyy"
+    },
+    "bs": {
+        "name": "Bosnian",
+        "format": "dd/MM/yyyy"
+    },
+    "bg-BG": {
+        "name": "Bulgarian (Bulgaria)",
+        "format": "dd.M.yyyy"
+    },
+    "bg": {
+        "name": "Bulgarian",
+        "format": "dd/MM/yyyy"
+    },
+    "my-MM": {
+        "name": "Burmese (Myanmar [Burma])",
+        "format": "dd/MM/yyyy"
+    },
+    "my": {
+        "name": "Burmese",
+        "format": "dd/MM/yyyy"
+    },
+    "yue-Hant_HK": {
+        "name": "Cantonese (Traditional, Hong Kong SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "ca-ES": {
+        "name": "Catalan (Spain)",
+        "format": "dd/MM/yyyy"
+    },
+    "ca": {
+        "name": "Catalan",
+        "format": "dd/MM/yyyy"
+    },
+    "tzm-Latn": {
+        "name": "Central Morocco Tamazight (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "tzm-Latn_MA": {
+        "name": "Central Morocco Tamazight (Latin, Morocco)",
+        "format": "dd/MM/yyyy"
+    },
+    "tzm": {
+        "name": "Central Morocco Tamazight",
+        "format": "dd/MM/yyyy"
+    },
+    "chr-US": {
+        "name": "Cherokee (United States)",
+        "format": "dd/MM/yyyy"
+    },
+    "chr": {
+        "name": "Cherokee",
+        "format": "dd/MM/yyyy"
+    },
+    "cgg-UG": {
+        "name": "Chiga (Uganda)",
+        "format": "dd/MM/yyyy"
+    },
+    "cgg": {
+        "name": "Chiga",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hans": {
+        "name": "Chinese (Simplified Han)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hans_CN": {
+        "name": "Chinese (Simplified Han, China)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hans_HK": {
+        "name": "Chinese (Simplified Han, Hong Kong SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hans_MO": {
+        "name": "Chinese (Simplified Han, Macau SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hans_SG": {
+        "name": "Chinese (Simplified Han, Singapore)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hant": {
+        "name": "Chinese (Traditional Han)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hant_HK": {
+        "name": "Chinese (Traditional Han, Hong Kong SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hant_MO": {
+        "name": "Chinese (Traditional Han, Macau SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh-Hant_TW": {
+        "name": "Chinese (Traditional Han, Taiwan)",
+        "format": "dd/MM/yyyy"
+    },
+    "zh": {
+        "name": "Chinese",
+        "format": "dd/MM/yyyy"
+    },
+    "kw-GB": {
+        "name": "Cornish (United Kingdom)",
+        "format": "dd/MM/yyyy"
+    },
+    "kw": {
+        "name": "Cornish",
+        "format": "dd/MM/yyyy"
+    },
+    "hr-HR": {
+        "name": "Croatian (Croatia)",
+        "format": "d.M.yyyy"
+    },
+    "hr": {
+        "name": "Croatian",
+        "format": "dd/MM/yyyy"
+    },
+    "cs-CZ": {
+        "name": "Czech (Czech Republic)",
+        "format": "d.M.yyyy"
+    },
+    "cs": {
+        "name": "Czech",
+        "format": "dd/MM/yyyy"
+    },
+    "da-DK": {
+        "name": "Danish (Denmark)",
+        "format": "dd-MM-yyyy"
+    },
+    "da": {
+        "name": "Danish",
+        "format": "dd/MM/yyyy"
+    },
+    "nl-BE": {
+        "name": "Dutch (Belgium)",
+        "format": "d/MM/yyyy"
+    },
+    "nl-NL": {
+        "name": "Dutch (Netherlands)",
+        "format": "d-M-yyyy"
+    },
+    "nl": {
+        "name": "Dutch",
+        "format": "dd/MM/yyyy"
+    },
+    "ebu-KE": {
+        "name": "Embu (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "ebu": {
+        "name": "Embu",
+        "format": "dd/MM/yyyy"
+    },
+    "en-AS": {
+        "name": "English (American Samoa)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-AU": {
+        "name": "English (Australia)",
+        "format": "d/MM/yyyy"
+    },
+    "en-BE": {
+        "name": "English (Belgium)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-BZ": {
+        "name": "English (Belize)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-BW": {
+        "name": "English (Botswana)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-CA": {
+        "name": "English (Canada)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-GU": {
+        "name": "English (Guam)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-HK": {
+        "name": "English (Hong Kong SAR China)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-IN": {
+        "name": "English (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "en-IE": {
+        "name": "English (Ireland)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-IL": {
+        "name": "English (Israel)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-JM": {
+        "name": "English (Jamaica)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-MT": {
+        "name": "English (Malta)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-MH": {
+        "name": "English (Marshall Islands)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-MU": {
+        "name": "English (Mauritius)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-NA": {
+        "name": "English (Namibia)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-NZ": {
+        "name": "English (New Zealand)",
+        "format": "d/MM/yyyy"
+    },
+    "en-MP": {
+        "name": "English (Northern Mariana Islands)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-PK": {
+        "name": "English (Pakistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-PH": {
+        "name": "English (Philippines)",
+        "format": "M/d/yyyy"
+    },
+    "en-SG": {
+        "name": "English (Singapore)",
+        "format": "d/M/yyyy"
+    },
+    "en-ZA": {
+        "name": "English (South Africa)",
+        "format": "yyyy/MM/dd"
+    },
+    "en-TT": {
+        "name": "English (Trinidad and Tobago)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-UM": {
+        "name": "English (U.S. Minor Outlying Islands)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-VI": {
+        "name": "English (U.S. Virgin Islands)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-GB": {
+        "name": "English (United Kingdom)",
+        "format": "dd/MM/yyyy"
+    },
+    "en-US": {
+        "name": "English (United States)",
+        "format": "M/d/yyyy"
+    },
+    "en-ZW": {
+        "name": "English (Zimbabwe)",
+        "format": "M/d/yyyy"
+    },
+    "en": {
+        "name": "English",
+        "format": "dd/MM/yyyy"
+    },
+    "eo": {
+        "name": "Esperanto",
+        "format": "dd/MM/yyyy"
+    },
+    "et-EE": {
+        "name": "Estonian (Estonia)",
+        "format": "d.MM.yyyy"
+    },
+    "et": {
+        "name": "Estonian",
+        "format": "dd/MM/yyyy"
+    },
+    "ee-GH": {
+        "name": "Ewe (Ghana)",
+        "format": "dd/MM/yyyy"
+    },
+    "ee-TG": {
+        "name": "Ewe (Togo)",
+        "format": "dd/MM/yyyy"
+    },
+    "ee": {
+        "name": "Ewe",
+        "format": "dd/MM/yyyy"
+    },
+    "fo-FO": {
+        "name": "Faroese (Faroe Islands)",
+        "format": "dd-MM-yyyy"
+    },
+    "fo": {
+        "name": "Faroese",
+        "format": "dd/MM/yyyy"
+    },
+    "fil-PH": {
+        "name": "Filipino (Philippines)",
+        "format": "M/d/yyyy"
+    },
+    "fil": {
+        "name": "Filipino",
+        "format": "dd/MM/yyyy"
+    },
+    "fi-FI": {
+        "name": "Finnish (Finland)",
+        "format": "d.M.yyyy"
+    },
+    "fi": {
+        "name": "Finnish",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-BE": {
+        "name": "French (Belgium)",
+        "format": "d/MM/yyyy"
+    },
+    "fr-BJ": {
+        "name": "French (Benin)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-BF": {
+        "name": "French (Burkina Faso)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-BI": {
+        "name": "French (Burundi)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CM": {
+        "name": "French (Cameroon)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CA": {
+        "name": "French (Canada)",
+        "format": "yyyy-MM-dd"
+    },
+    "fr-CF": {
+        "name": "French (Central African Republic)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-TD": {
+        "name": "French (Chad)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-KM": {
+        "name": "French (Comoros)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CG": {
+        "name": "French (Congo - Brazzaville)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CD": {
+        "name": "French (Congo - Kinshasa)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CI": {
+        "name": "French (Côte d’Ivoire)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-DJ": {
+        "name": "French (Djibouti)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-GQ": {
+        "name": "French (Equatorial Guinea)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-FR": {
+        "name": "French (France)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-GA": {
+        "name": "French (Gabon)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-GP": {
+        "name": "French (Guadeloupe)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-GN": {
+        "name": "French (Guinea)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-LU": {
+        "name": "French (Luxembourg)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-MG": {
+        "name": "French (Madagascar)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-ML": {
+        "name": "French (Mali)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-MQ": {
+        "name": "French (Martinique)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-MC": {
+        "name": "French (Monaco)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-NE": {
+        "name": "French (Niger)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-RW": {
+        "name": "French (Rwanda)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-RE": {
+        "name": "French (Réunion)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-BL": {
+        "name": "French (Saint Barthélemy)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-MF": {
+        "name": "French (Saint Martin)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-SN": {
+        "name": "French (Senegal)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr-CH": {
+        "name": "French (Switzerland)",
+        "format": "dd.MM.yyyy"
+    },
+    "fr-TG": {
+        "name": "French (Togo)",
+        "format": "dd/MM/yyyy"
+    },
+    "fr": {
+        "name": "French",
+        "format": "dd/MM/yyyy"
+    },
+    "ff-SN": {
+        "name": "Fulah (Senegal)",
+        "format": "dd/MM/yyyy"
+    },
+    "ff": {
+        "name": "Fulah",
+        "format": "dd/MM/yyyy"
+    },
+    "gl-ES": {
+        "name": "Galician (Spain)",
+        "format": "dd/MM/yy"
+    },
+    "gl": {
+        "name": "Galician",
+        "format": "dd/MM/yyyy"
+    },
+    "lg-UG": {
+        "name": "Ganda (Uganda)",
+        "format": "dd/MM/yyyy"
+    },
+    "lg": {
+        "name": "Ganda",
+        "format": "dd/MM/yyyy"
+    },
+    "ka-GE": {
+        "name": "Georgian (Georgia)",
+        "format": "dd.MM.yyyy"
+    },
+    "ka": {
+        "name": "Georgian",
+        "format": "dd/MM/yyyy"
+    },
+    "de-AT": {
+        "name": "German (Austria)",
+        "format": "dd.MM.yyyy"
+    },
+    "de-BE": {
+        "name": "German (Belgium)",
+        "format": "dd/MM/yyyy"
+    },
+    "de-DE": {
+        "name": "German (Germany)",
+        "format": "dd.MM.yyyy"
+    },
+    "de-LI": {
+        "name": "German (Liechtenstein)",
+        "format": "dd.MM.yyyy"
+    },
+    "de-LU": {
+        "name": "German (Luxembourg)",
+        "format": "dd.MM.yyyy"
+    },
+    "de-CH": {
+        "name": "German (Switzerland)",
+        "format": "dd.MM.yyyy"
+    },
+    "de": {
+        "name": "German",
+        "format": "dd/MM/yyyy"
+    },
+    "el-CY": {
+        "name": "Greek (Cyprus)",
+        "format": "dd/MM/yyyy"
+    },
+    "el-GR": {
+        "name": "Greek (Greece)",
+        "format": "d/M/yyyy"
+    },
+    "el": {
+        "name": "Greek",
+        "format": "dd/MM/yyyy"
+    },
+    "gu-IN": {
+        "name": "Gujarati (India)",
+        "format": "dd-MM-yy"
+    },
+    "gu": {
+        "name": "Gujarati",
+        "format": "dd/MM/yyyy"
+    },
+    "guz-KE": {
+        "name": "Gusii (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "guz": {
+        "name": "Gusii",
+        "format": "dd/MM/yyyy"
+    },
+    "ha-Latn": {
+        "name": "Hausa (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "ha-Latn_GH": {
+        "name": "Hausa (Latin, Ghana)",
+        "format": "dd/MM/yyyy"
+    },
+    "ha-Latn_NE": {
+        "name": "Hausa (Latin, Niger)",
+        "format": "dd/MM/yyyy"
+    },
+    "ha-Latn_NG": {
+        "name": "Hausa (Latin, Nigeria)",
+        "format": "dd/MM/yyyy"
+    },
+    "ha": {
+        "name": "Hausa",
+        "format": "dd/MM/yyyy"
+    },
+    "haw-US": {
+        "name": "Hawaiian (United States)",
+        "format": "dd/MM/yyyy"
+    },
+    "haw": {
+        "name": "Hawaiian",
+        "format": "dd/MM/yyyy"
+    },
+    "he-IL": {
+        "name": "Hebrew (Israel)",
+        "format": "dd/MM/yyyy"
+    },
+    "he": {
+        "name": "Hebrew",
+        "format": "dd/MM/yyyy"
+    },
+    "hi-IN": {
+        "name": "Hindi (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "hi": {
+        "name": "Hindi",
+        "format": "dd/MM/yyyy"
+    },
+    "hu-HU": {
+        "name": "Hungarian (Hungary)",
+        "format": "yyyy. MM. dd."
+    },
+    "hu": {
+        "name": "Hungarian",
+        "format": "dd/MM/yyyy"
+    },
+    "is-IS": {
+        "name": "Icelandic (Iceland)",
+        "format": "d.M.yyyy"
+    },
+    "is": {
+        "name": "Icelandic",
+        "format": "dd/MM/yyyy"
+    },
+    "ig-NG": {
+        "name": "Igbo (Nigeria)",
+        "format": "d/M/yyyy"
+    },
+    "ig": {
+        "name": "Igbo",
+        "format": "dd/MM/yyyy"
+    },
+    "id-ID": {
+        "name": "Indonesian (Indonesia)",
+        "format": "dd/MM/yyyy"
+    },
+    "id": {
+        "name": "Indonesian",
+        "format": "dd/MM/yyyy"
+    },
+    "ga-IE": {
+        "name": "Irish (Ireland)",
+        "format": "dd/MM/yyyy"
+    },
+    "ga": {
+        "name": "Irish",
+        "format": "dd/MM/yyyy"
+    },
+    "it-IT": {
+        "name": "Italian (Italy)",
+        "format": "dd/MM/yyyy"
+    },
+    "it-CH": {
+        "name": "Italian (Switzerland)",
+        "format": "dd.MM.yyyy"
+    },
+    "it": {
+        "name": "Italian",
+        "format": "dd/MM/yyyy"
+    },
+    "ja-JP": {
+        "name": "Japanese (Japan)",
+        "format": "yyyy/MM/dd"
+    },
+    "ja": {
+        "name": "Japanese",
+        "format": "dd/MM/yyyy"
+    },
+    "kea-CV": {
+        "name": "Kabuverdianu (Cape Verde)",
+        "format": "dd/MM/yyyy"
+    },
+    "kea": {
+        "name": "Kabuverdianu",
+        "format": "dd/MM/yyyy"
+    },
+    "kab-DZ": {
+        "name": "Kabyle (Algeria)",
+        "format": "dd/MM/yyyy"
+    },
+    "kab": {
+        "name": "Kabyle",
+        "format": "dd/MM/yyyy"
+    },
+    "kl-GL": {
+        "name": "Kalaallisut (Greenland)",
+        "format": "dd-MM-yyyy"
+    },
+    "kl": {
+        "name": "Kalaallisut",
+        "format": "dd/MM/yyyy"
+    },
+    "kln-KE": {
+        "name": "Kalenjin (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "kln": {
+        "name": "Kalenjin",
+        "format": "dd/MM/yyyy"
+    },
+    "kam-KE": {
+        "name": "Kamba (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "kam": {
+        "name": "Kamba",
+        "format": "dd/MM/yyyy"
+    },
+    "kn-IN": {
+        "name": "Kannada (India)",
+        "format": "dd-MM-yy"
+    },
+    "kn": {
+        "name": "Kannada",
+        "format": "dd/MM/yyyy"
+    },
+    "kk-Cyrl": {
+        "name": "Kazakh (Cyrillic)",
+        "format": "dd/MM/yyyy"
+    },
+    "kk-Cyrl_KZ": {
+        "name": "Kazakh (Cyrillic, Kazakhstan)",
+        "format": "dd/MM/yyyy"
+    },
+    "kk": {
+        "name": "Kazakh",
+        "format": "dd/MM/yyyy"
+    },
+    "km-KH": {
+        "name": "Khmer (Cambodia)",
+        "format": "yyyy-MM-dd"
+    },
+    "km": {
+        "name": "Khmer",
+        "format": "dd/MM/yyyy"
+    },
+    "ki-KE": {
+        "name": "Kikuyu (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "ki": {
+        "name": "Kikuyu",
+        "format": "dd/MM/yyyy"
+    },
+    "rw-RW": {
+        "name": "Kinyarwanda (Rwanda)",
+        "format": "M/d/yyyy"
+    },
+    "rw": {
+        "name": "Kinyarwanda",
+        "format": "dd/MM/yyyy"
+    },
+    "kok-IN": {
+        "name": "Konkani (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "kok": {
+        "name": "Konkani",
+        "format": "dd/MM/yyyy"
+    },
+    "ko-KR": {
+        "name": "Korean (South Korea)",
+        "format": "yyyy. MM. dd"
+    },
+    "ko": {
+        "name": "Korean",
+        "format": "dd/MM/yyyy"
+    },
+    "khq-ML": {
+        "name": "Koyra Chiini (Mali)",
+        "format": "dd/MM/yyyy"
+    },
+    "khq": {
+        "name": "Koyra Chiini",
+        "format": "dd/MM/yyyy"
+    },
+    "ses-ML": {
+        "name": "Koyraboro Senni (Mali)",
+        "format": "dd/MM/yyyy"
+    },
+    "ses": {
+        "name": "Koyraboro Senni",
+        "format": "dd/MM/yyyy"
+    },
+    "lag-TZ": {
+        "name": "Langi (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "lag": {
+        "name": "Langi",
+        "format": "dd/MM/yyyy"
+    },
+    "lv-LV": {
+        "name": "Latvian (Latvia)",
+        "format": "yyyy.MM.dd."
+    },
+    "lv": {
+        "name": "Latvian",
+        "format": "dd/MM/yyyy"
+    },
+    "lt-LT": {
+        "name": "Lithuanian (Lithuania)",
+        "format": "yyyy.MM.dd"
+    },
+    "lt": {
+        "name": "Lithuanian",
+        "format": "dd/MM/yyyy"
+    },
+    "luo-KE": {
+        "name": "Luo (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "luo": {
+        "name": "Luo",
+        "format": "dd/MM/yyyy"
+    },
+    "luy-KE": {
+        "name": "Luyia (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "luy": {
+        "name": "Luyia",
+        "format": "dd/MM/yyyy"
+    },
+    "mk-MK": {
+        "name": "Macedonian (Macedonia)",
+        "format": "dd.MM.yyyy"
+    },
+    "mk": {
+        "name": "Macedonian",
+        "format": "dd/MM/yyyy"
+    },
+    "jmc-TZ": {
+        "name": "Machame (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "jmc": {
+        "name": "Machame",
+        "format": "dd/MM/yyyy"
+    },
+    "kde-TZ": {
+        "name": "Makonde (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "kde": {
+        "name": "Makonde",
+        "format": "dd/MM/yyyy"
+    },
+    "mg-MG": {
+        "name": "Malagasy (Madagascar)",
+        "format": "dd/MM/yyyy"
+    },
+    "mg": {
+        "name": "Malagasy",
+        "format": "dd/MM/yyyy"
+    },
+    "ms-BN": {
+        "name": "Malay (Brunei)",
+        "format": "dd/MM/yyyy"
+    },
+    "ms-MY": {
+        "name": "Malay (Malaysia)",
+        "format": "dd/MM/yyyy"
+    },
+    "ms": {
+        "name": "Malay",
+        "format": "dd/MM/yyyy"
+    },
+    "ml-IN": {
+        "name": "Malayalam (India)",
+        "format": "dd-MM-yy"
+    },
+    "ml": {
+        "name": "Malayalam",
+        "format": "dd/MM/yyyy"
+    },
+    "mt-MT": {
+        "name": "Maltese (Malta)",
+        "format": "dd/MM/yyyy"
+    },
+    "mt": {
+        "name": "Maltese",
+        "format": "dd/MM/yyyy"
+    },
+    "gv-GB": {
+        "name": "Manx (United Kingdom)",
+        "format": "dd/MM/yyyy"
+    },
+    "gv": {
+        "name": "Manx",
+        "format": "dd/MM/yyyy"
+    },
+    "mr-IN": {
+        "name": "Marathi (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "mr": {
+        "name": "Marathi",
+        "format": "dd/MM/yyyy"
+    },
+    "mas-KE": {
+        "name": "Masai (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "mas-TZ": {
+        "name": "Masai (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "mas": {
+        "name": "Masai",
+        "format": "dd/MM/yyyy"
+    },
+    "mer-KE": {
+        "name": "Meru (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "mer": {
+        "name": "Meru",
+        "format": "dd/MM/yyyy"
+    },
+    "mfe-MU": {
+        "name": "Morisyen (Mauritius)",
+        "format": "dd/MM/yyyy"
+    },
+    "mfe": {
+        "name": "Morisyen",
+        "format": "dd/MM/yyyy"
+    },
+    "naq-NA": {
+        "name": "Nama (Namibia)",
+        "format": "dd/MM/yyyy"
+    },
+    "naq": {
+        "name": "Nama",
+        "format": "dd/MM/yyyy"
+    },
+    "ne-IN": {
+        "name": "Nepali (India)",
+        "format": "dd/MM/yyyy"
+    },
+    "ne-NP": {
+        "name": "Nepali (Nepal)",
+        "format": "M/d/yyyy"
+    },
+    "ne": {
+        "name": "Nepali",
+        "format": "dd/MM/yyyy"
+    },
+    "nd-ZW": {
+        "name": "North Ndebele (Zimbabwe)",
+        "format": "dd/MM/yyyy"
+    },
+    "nd": {
+        "name": "North Ndebele",
+        "format": "dd/MM/yyyy"
+    },
+    "nb-NO": {
+        "name": "Norwegian Bokmål (Norway)",
+        "format": "dd.MM.yyyy"
+    },
+    "nb": {
+        "name": "Norwegian Bokmål",
+        "format": "dd/MM/yyyy"
+    },
+    "nn-NO": {
+        "name": "Norwegian Nynorsk (Norway)",
+        "format": "dd.MM.yyyy"
+    },
+    "nn": {
+        "name": "Norwegian Nynorsk",
+        "format": "dd/MM/yyyy"
+    },
+    "nyn-UG": {
+        "name": "Nyankole (Uganda)",
+        "format": "dd/MM/yyyy"
+    },
+    "nyn": {
+        "name": "Nyankole",
+        "format": "dd/MM/yyyy"
+    },
+    "or-IN": {
+        "name": "Oriya (India)",
+        "format": "dd-MM-yy"
+    },
+    "or": {
+        "name": "Oriya",
+        "format": "dd/MM/yyyy"
+    },
+    "om-ET": {
+        "name": "Oromo (Ethiopia)",
+        "format": "dd/MM/yyyy"
+    },
+    "om-KE": {
+        "name": "Oromo (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "om": {
+        "name": "Oromo",
+        "format": "dd/MM/yyyy"
+    },
+    "ps-AF": {
+        "name": "Pashto (Afghanistan)",
+        "format": "dd/MM/yy"
+    },
+    "ps": {
+        "name": "Pashto",
+        "format": "dd/MM/yyyy"
+    },
+    "fa-AF": {
+        "name": "Persian (Afghanistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "fa-IR": {
+        "name": "Persian (Iran)",
+        "format": "MM/dd/yyyy"
+    },
+    "fa": {
+        "name": "Persian",
+        "format": "dd/MM/yyyy"
+    },
+    "pl-PL": {
+        "name": "Polish (Poland)",
+        "format": "dd.MM.yyyy"
+    },
+    "pl": {
+        "name": "Polish",
+        "format": "dd/MM/yyyy"
+    },
+    "pt-BR": {
+        "name": "Portuguese (Brazil)",
+        "format": "d/M/yyyy"
+    },
+    "pt-GW": {
+        "name": "Portuguese (Guinea-Bissau)",
+        "format": "dd/MM/yyyy"
+    },
+    "pt-MZ": {
+        "name": "Portuguese (Mozambique)",
+        "format": "dd/MM/yyyy"
+    },
+    "pt-PT": {
+        "name": "Portuguese (Portugal)",
+        "format": "dd-MM-yyyy"
+    },
+    "pt": {
+        "name": "Portuguese",
+        "format": "dd/MM/yyyy"
+    },
+    "pa-Arab": {
+        "name": "Punjabi (Arabic)",
+        "format": "dd/MM/yyyy"
+    },
+    "pa-Arab_PK": {
+        "name": "Punjabi (Arabic, Pakistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "pa-Guru": {
+        "name": "Punjabi (Gurmukhi)",
+        "format": "dd/MM/yyyy"
+    },
+    "pa-Guru_IN": {
+        "name": "Punjabi (Gurmukhi, India)",
+        "format": "dd/MM/yyyy"
+    },
+    "pa": {
+        "name": "Punjabi",
+        "format": "dd/MM/yyyy"
+    },
+    "ro-MD": {
+        "name": "Romanian (Moldova)",
+        "format": "dd/MM/yyyy"
+    },
+    "ro-RO": {
+        "name": "Romanian (Romania)",
+        "format": "dd.MM.yyyy"
+    },
+    "ro": {
+        "name": "Romanian",
+        "format": "dd/MM/yyyy"
+    },
+    "rm-CH": {
+        "name": "Romansh (Switzerland)",
+        "format": "dd/MM/yyyy"
+    },
+    "rm": {
+        "name": "Romansh",
+        "format": "dd/MM/yyyy"
+    },
+    "rof-TZ": {
+        "name": "Rombo (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "rof": {
+        "name": "Rombo",
+        "format": "dd/MM/yyyy"
+    },
+    "ru-MD": {
+        "name": "Russian (Moldova)",
+        "format": "dd/MM/yyyy"
+    },
+    "ru-RU": {
+        "name": "Russian (Russia)",
+        "format": "dd.MM.yyyy"
+    },
+    "ru-UA": {
+        "name": "Russian (Ukraine)",
+        "format": "dd/MM/yyyy"
+    },
+    "ru": {
+        "name": "Russian",
+        "format": "dd/MM/yyyy"
+    },
+    "rwk-TZ": {
+        "name": "Rwa (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "rwk": {
+        "name": "Rwa",
+        "format": "dd/MM/yyyy"
+    },
+    "saq-KE": {
+        "name": "Samburu (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "saq": {
+        "name": "Samburu",
+        "format": "dd/MM/yyyy"
+    },
+    "sg-CF": {
+        "name": "Sango (Central African Republic)",
+        "format": "dd/MM/yyyy"
+    },
+    "sg": {
+        "name": "Sango",
+        "format": "dd/MM/yyyy"
+    },
+    "seh-MZ": {
+        "name": "Sena (Mozambique)",
+        "format": "dd/MM/yyyy"
+    },
+    "seh": {
+        "name": "Sena",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Cyrl": {
+        "name": "Serbian (Cyrillic)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Cyrl_BA": {
+        "name": "Serbian (Cyrillic, Bosnia and Herzegovina)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Cyrl_ME": {
+        "name": "Serbian (Cyrillic, Montenegro)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Cyrl_RS": {
+        "name": "Serbian (Cyrillic, Serbia)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Latn": {
+        "name": "Serbian (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Latn_BA": {
+        "name": "Serbian (Latin, Bosnia and Herzegovina)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Latn_ME": {
+        "name": "Serbian (Latin, Montenegro)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr-Latn_RS": {
+        "name": "Serbian (Latin, Serbia)",
+        "format": "dd/MM/yyyy"
+    },
+    "sr": {
+        "name": "Serbian",
+        "format": "dd/MM/yyyy"
+    },
+    "sn-ZW": {
+        "name": "Shona (Zimbabwe)",
+        "format": "dd/MM/yyyy"
+    },
+    "sn": {
+        "name": "Shona",
+        "format": "dd/MM/yyyy"
+    },
+    "ii-CN": {
+        "name": "Sichuan Yi (China)",
+        "format": "yyyy/M/d"
+    },
+    "ii": {
+        "name": "Sichuan Yi",
+        "format": "dd/MM/yyyy"
+    },
+    "si-LK": {
+        "name": "Sinhala (Sri Lanka)",
+        "format": "yyyy-MM-dd"
+    },
+    "si": {
+        "name": "Sinhala",
+        "format": "dd/MM/yyyy"
+    },
+    "sk-SK": {
+        "name": "Slovak (Slovakia)",
+        "format": "d. M. yyyy"
+    },
+    "sk": {
+        "name": "Slovak",
+        "format": "dd/MM/yyyy"
+    },
+    "sl-SI": {
+        "name": "Slovenian (Slovenia)",
+        "format": "d.M.yyyy"
+    },
+    "sl": {
+        "name": "Slovenian",
+        "format": "dd/MM/yyyy"
+    },
+    "xog-UG": {
+        "name": "Soga (Uganda)",
+        "format": "dd/MM/yyyy"
+    },
+    "xog": {
+        "name": "Soga",
+        "format": "dd/MM/yyyy"
+    },
+    "so-DJ": {
+        "name": "Somali (Djibouti)",
+        "format": "dd/MM/yyyy"
+    },
+    "so-ET": {
+        "name": "Somali (Ethiopia)",
+        "format": "dd/MM/yyyy"
+    },
+    "so-KE": {
+        "name": "Somali (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "so-SO": {
+        "name": "Somali (Somalia)",
+        "format": "dd/MM/yyyy"
+    },
+    "so": {
+        "name": "Somali",
+        "format": "dd/MM/yyyy"
+    },
+    "es-AR": {
+        "name": "Spanish (Argentina)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-BO": {
+        "name": "Spanish (Bolivia)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-CL": {
+        "name": "Spanish (Chile)",
+        "format": "dd-MM-yyyy"
+    },
+    "es-CO": {
+        "name": "Spanish (Colombia)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-CR": {
+        "name": "Spanish (Costa Rica)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-DO": {
+        "name": "Spanish (Dominican Republic)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-EC": {
+        "name": "Spanish (Ecuador)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-SV": {
+        "name": "Spanish (El Salvador)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-GQ": {
+        "name": "Spanish (Equatorial Guinea)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-GT": {
+        "name": "Spanish (Guatemala)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-HN": {
+        "name": "Spanish (Honduras)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-419": {
+        "name": "Spanish (Latin America)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-MX": {
+        "name": "Spanish (Mexico)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-NI": {
+        "name": "Spanish (Nicaragua)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-PA": {
+        "name": "Spanish (Panama)",
+        "format": "MM/dd/yyyy"
+    },
+    "es-PY": {
+        "name": "Spanish (Paraguay)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-PE": {
+        "name": "Spanish (Peru)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-PR": {
+        "name": "Spanish (Puerto Rico)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-ES": {
+        "name": "Spanish (Spain)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-US": {
+        "name": "Spanish (United States)",
+        "format": "M/d/yyyy"
+    },
+    "es-UY": {
+        "name": "Spanish (Uruguay)",
+        "format": "dd/MM/yyyy"
+    },
+    "es-VE": {
+        "name": "Spanish (Venezuela)",
+        "format": "dd/MM/yyyy"
+    },
+    "es": {
+        "name": "Spanish",
+        "format": "dd/MM/yyyy"
+    },
+    "sw-KE": {
+        "name": "Swahili (Kenya)",
+        "format": "M/d/yyyy"
+    },
+    "sw-TZ": {
+        "name": "Swahili (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "sw": {
+        "name": "Swahili",
+        "format": "dd/MM/yyyy"
+    },
+    "sv-FI": {
+        "name": "Swedish (Finland)",
+        "format": "d.M.yyyy"
+    },
+    "sv-SE": {
+        "name": "Swedish (Sweden)",
+        "format": "yyyy-MM-dd"
+    },
+    "sv": {
+        "name": "Swedish",
+        "format": "dd/MM/yyyy"
+    },
+    "gsw-CH": {
+        "name": "Swiss German (Switzerland)",
+        "format": "dd/MM/yyyy"
+    },
+    "gsw": {
+        "name": "Swiss German",
+        "format": "dd/MM/yyyy"
+    },
+    "shi-Latn": {
+        "name": "Tachelhit (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "shi-Latn_MA": {
+        "name": "Tachelhit (Latin, Morocco)",
+        "format": "dd/MM/yyyy"
+    },
+    "shi-Tfng": {
+        "name": "Tachelhit (Tifinagh)",
+        "format": "dd/MM/yyyy"
+    },
+    "shi-Tfng_MA": {
+        "name": "Tachelhit (Tifinagh, Morocco)",
+        "format": "dd/MM/yyyy"
+    },
+    "shi": {
+        "name": "Tachelhit",
+        "format": "dd/MM/yyyy"
+    },
+    "dav-KE": {
+        "name": "Taita (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "dav": {
+        "name": "Taita",
+        "format": "dd/MM/yyyy"
+    },
+    "ta-IN": {
+        "name": "Tamil (India)",
+        "format": "dd-MM-yyyy"
+    },
+    "ta-LK": {
+        "name": "Tamil (Sri Lanka)",
+        "format": "dd/MM/yyyy"
+    },
+    "ta": {
+        "name": "Tamil",
+        "format": "dd/MM/yyyy"
+    },
+    "te-IN": {
+        "name": "Telugu (India)",
+        "format": "dd-MM-yy"
+    },
+    "te": {
+        "name": "Telugu",
+        "format": "dd/MM/yyyy"
+    },
+    "teo-KE": {
+        "name": "Teso (Kenya)",
+        "format": "dd/MM/yyyy"
+    },
+    "teo-UG": {
+        "name": "Teso (Uganda)",
+        "format": "dd/MM/yyyy"
+    },
+    "teo": {
+        "name": "Teso",
+        "format": "dd/MM/yyyy"
+    },
+    "th-TH": {
+        "name": "Thai (Thailand)",
+        "format": "d/M/yyyy"
+    },
+    "th": {
+        "name": "Thai",
+        "format": "dd/MM/yyyy"
+    },
+    "bo-CN": {
+        "name": "Tibetan (China)",
+        "format": "yyyy/M/d"
+    },
+    "bo-IN": {
+        "name": "Tibetan (India)",
+        "format": "dd/MM/yyyy"
+    },
+    "bo": {
+        "name": "Tibetan",
+        "format": "dd/MM/yyyy"
+    },
+    "ti-ER": {
+        "name": "Tigrinya (Eritrea)",
+        "format": "dd/MM/yyyy"
+    },
+    "ti-ET": {
+        "name": "Tigrinya (Ethiopia)",
+        "format": "dd/MM/yyyy"
+    },
+    "ti": {
+        "name": "Tigrinya",
+        "format": "dd/MM/yyyy"
+    },
+    "to-TO": {
+        "name": "Tonga (Tonga)",
+        "format": "dd/MM/yyyy"
+    },
+    "to": {
+        "name": "Tonga",
+        "format": "dd/MM/yyyy"
+    },
+    "tr-TR": {
+        "name": "Turkish (Turkey)",
+        "format": "dd.MM.yyyy"
+    },
+    "tr": {
+        "name": "Turkish",
+        "format": "dd/MM/yyyy"
+    },
+    "uk-UA": {
+        "name": "Ukrainian (Ukraine)",
+        "format": "dd.MM.yyyy"
+    },
+    "uk": {
+        "name": "Ukrainian",
+        "format": "dd/MM/yyyy"
+    },
+    "ur-IN": {
+        "name": "Urdu (India)",
+        "format": "dd/MM/yyyy"
+    },
+    "ur-PK": {
+        "name": "Urdu (Pakistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "ur": {
+        "name": "Urdu",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Arab": {
+        "name": "Uzbek (Arabic)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Arab_AF": {
+        "name": "Uzbek (Arabic, Afghanistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Cyrl": {
+        "name": "Uzbek (Cyrillic)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Cyrl_UZ": {
+        "name": "Uzbek (Cyrillic, Uzbekistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Latn": {
+        "name": "Uzbek (Latin)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz-Latn_UZ": {
+        "name": "Uzbek (Latin, Uzbekistan)",
+        "format": "dd/MM/yyyy"
+    },
+    "uz": {
+        "name": "Uzbek",
+        "format": "dd/MM/yyyy"
+    },
+    "vi-VN": {
+        "name": "Vietnamese (Vietnam)",
+        "format": "dd/MM/yyyy"
+    },
+    "vi": {
+        "name": "Vietnamese",
+        "format": "dd/MM/yyyy"
+    },
+    "vun-TZ": {
+        "name": "Vunjo (Tanzania)",
+        "format": "dd/MM/yyyy"
+    },
+    "vun": {
+        "name": "Vunjo",
+        "format": "dd/MM/yyyy"
+    },
+    "cy-GB": {
+        "name": "Welsh (United Kingdom)",
+        "format": "dd/MM/yyyy"
+    },
+    "cy": {
+        "name": "Welsh",
+        "format": "dd/MM/yyyy"
+    },
+    "yo-NG": {
+        "name": "Yoruba (Nigeria)",
+        "format": "d/M/yyyy"
+    },
+    "yo": {
+        "name": "Yoruba",
+        "format": "dd/MM/yyyy"
+    },
+    "zu-ZA": {
+        "name": "Zulu (South Africa)",
+        "format": "yyyy/MM/dd"
+    },
+    "zu": {
+        "name": "Zulu",
+        "format": "dd/MM/yyyy"
+    },
+    "arn-CL": {
+        "name": "arn-CL",
+        "format": "dd-MM-yyyy"
+    },
+    "az-Cyrl-AZ": {
+        "name": "az-Cyrl-AZ",
+        "format": "dd.MM.yyyy"
+    },
+    "az-Latn-AZ": {
+        "name": "az-Latn-AZ",
+        "format": "dd.MM.yyyy"
+    },
+    "ba-RU": {
+        "name": "ba-RU",
+        "format": "dd.MM.yy"
+    },
+    "br-FR": {
+        "name": "br-FR",
+        "format": "dd/MM/yyyy"
+    },
+    "bs-Cyrl-BA": {
+        "name": "bs-Cyrl-BA",
+        "format": "d.M.yyyy"
+    },
+    "bs-Latn-BA": {
+        "name": "bs-Latn-BA",
+        "format": "d.M.yyyy"
+    },
+    "co-FR": {
+        "name": "co-FR",
+        "format": "dd/MM/yyyy"
+    },
+    "dsb-DE": {
+        "name": "dsb-DE",
+        "format": "d. M. yyyy"
+    },
+    "dv-MV": {
+        "name": "dv-MV",
+        "format": "dd/MM/yy"
+    },
+    "en-029": {
+        "name": "en-029",
+        "format": "MM/dd/yyyy"
+    },
+    "en-MY": {
+        "name": "en-MY",
+        "format": "d/M/yyyy"
+    },
+    "fy-NL": {
+        "name": "fy-NL",
+        "format": "d-M-yyyy"
+    },
+    "gd-GB": {
+        "name": "gd-GB",
+        "format": "dd/MM/yyyy"
+    },
+    "gsw-FR": {
+        "name": "gsw-FR",
+        "format": "dd/MM/yyyy"
+    },
+    "ha-Latn-NG": {
+        "name": "ha-Latn-NG",
+        "format": "d/M/yyyy"
+    },
+    "hr-BA": {
+        "name": "hr-BA",
+        "format": "d.M.yyyy."
+    },
+    "hsb-DE": {
+        "name": "hsb-DE",
+        "format": "d. M. yyyy"
+    },
+    "iu-Cans-CA": {
+        "name": "iu-Cans-CA",
+        "format": "d/M/yyyy"
+    },
+    "iu-Latn-CA": {
+        "name": "iu-Latn-CA",
+        "format": "d/MM/yyyy"
+    },
+    "kk-KZ": {
+        "name": "kk-KZ",
+        "format": "dd.MM.yyyy"
+    },
+    "ky-KG": {
+        "name": "ky-KG",
+        "format": "dd.MM.yy"
+    },
+    "lb-LU": {
+        "name": "lb-LU",
+        "format": "dd/MM/yyyy"
+    },
+    "lo-LA": {
+        "name": "lo-LA",
+        "format": "dd/MM/yyyy"
+    },
+    "mi-NZ": {
+        "name": "mi-NZ",
+        "format": "dd/MM/yyyy"
+    },
+    "mn-MN": {
+        "name": "mn-MN",
+        "format": "yy.MM.dd"
+    },
+    "mn-Mong-CN": {
+        "name": "mn-Mong-CN",
+        "format": "yyyy/M/d"
+    },
+    "moh-CA": {
+        "name": "moh-CA",
+        "format": "M/d/yyyy"
+    },
+    "nso-ZA": {
+        "name": "nso-ZA",
+        "format": "yyyy/MM/dd"
+    },
+    "oc-FR": {
+        "name": "oc-FR",
+        "format": "dd/MM/yyyy"
+    },
+    "pa-IN": {
+        "name": "pa-IN",
+        "format": "dd-MM-yy"
+    },
+    "prs-AF": {
+        "name": "prs-AF",
+        "format": "dd/MM/yy"
+    },
+    "qut-GT": {
+        "name": "qut-GT",
+        "format": "dd/MM/yyyy"
+    },
+    "quz-BO": {
+        "name": "quz-BO",
+        "format": "dd/MM/yyyy"
+    },
+    "quz-EC": {
+        "name": "quz-EC",
+        "format": "dd/MM/yyyy"
+    },
+    "quz-PE": {
+        "name": "quz-PE",
+        "format": "dd/MM/yyyy"
+    },
+    "sa-IN": {
+        "name": "sa-IN",
+        "format": "dd-MM-yyyy"
+    },
+    "sah-RU": {
+        "name": "sah-RU",
+        "format": "MM.dd.yyyy"
+    },
+    "se-FI": {
+        "name": "se-FI",
+        "format": "d.M.yyyy"
+    },
+    "se-NO": {
+        "name": "se-NO",
+        "format": "dd.MM.yyyy"
+    },
+    "se-SE": {
+        "name": "se-SE",
+        "format": "yyyy-MM-dd"
+    },
+    "sma-NO": {
+        "name": "sma-NO",
+        "format": "dd.MM.yyyy"
+    },
+    "sma-SE": {
+        "name": "sma-SE",
+        "format": "yyyy-MM-dd"
+    },
+    "smj-NO": {
+        "name": "smj-NO",
+        "format": "dd.MM.yyyy"
+    },
+    "smj-SE": {
+        "name": "smj-SE",
+        "format": "yyyy-MM-dd"
+    },
+    "smn-FI": {
+        "name": "smn-FI",
+        "format": "d.M.yyyy"
+    },
+    "sms-FI": {
+        "name": "sms-FI",
+        "format": "d.M.yyyy"
+    },
+    "sr-Cyrl-BA": {
+        "name": "sr-Cyrl-BA",
+        "format": "d.M.yyyy"
+    },
+    "sr-Cyrl-CS": {
+        "name": "sr-Cyrl-CS",
+        "format": "d.M.yyyy"
+    },
+    "sr-Cyrl-ME": {
+        "name": "sr-Cyrl-ME",
+        "format": "d.M.yyyy"
+    },
+    "sr-Cyrl-RS": {
+        "name": "sr-Cyrl-RS",
+        "format": "d.M.yyyy"
+    },
+    "sr-Latn-BA": {
+        "name": "sr-Latn-BA",
+        "format": "d.M.yyyy"
+    },
+    "sr-Latn-CS": {
+        "name": "sr-Latn-CS",
+        "format": "d.M.yyyy"
+    },
+    "sr-Latn-ME": {
+        "name": "sr-Latn-ME",
+        "format": "d.M.yyyy"
+    },
+    "sr-Latn-RS": {
+        "name": "sr-Latn-RS",
+        "format": "d.M.yyyy"
+    },
+    "syr-SY": {
+        "name": "syr-SY",
+        "format": "dd/MM/yyyy"
+    },
+    "tg-Cyrl-TJ": {
+        "name": "tg-Cyrl-TJ",
+        "format": "dd.MM.yy"
+    },
+    "tk-TM": {
+        "name": "tk-TM",
+        "format": "dd.MM.yy"
+    },
+    "tn-ZA": {
+        "name": "tn-ZA",
+        "format": "yyyy/MM/dd"
+    },
+    "tt-RU": {
+        "name": "tt-RU",
+        "format": "dd.MM.yyyy"
+    },
+    "tzm-Latn-DZ": {
+        "name": "tzm-Latn-DZ",
+        "format": "dd-MM-yyyy"
+    },
+    "ug-CN": {
+        "name": "ug-CN",
+        "format": "yyyy-M-d"
+    },
+    "uz-Cyrl-UZ": {
+        "name": "uz-Cyrl-UZ",
+        "format": "dd.MM.yyyy"
+    },
+    "uz-Latn-UZ": {
+        "name": "uz-Latn-UZ",
+        "format": "dd/MM yyyy"
+    },
+    "wo-SN": {
+        "name": "wo-SN",
+        "format": "dd/MM/yyyy"
+    },
+    "xh-ZA": {
+        "name": "xh-ZA",
+        "format": "yyyy/MM/dd"
+    },
+    "zh-CN": {
+        "name": "zh-CN",
+        "format": "yyyy/M/d"
+    },
+    "zh-HK": {
+        "name": "zh-HK",
+        "format": "d/M/yyyy"
+    },
+    "zh-MO": {
+        "name": "zh-MO",
+        "format": "d/M/yyyy"
+    },
+    "zh-SG": {
+        "name": "zh-SG",
+        "format": "d/M/yyyy"
+    },
+    "zh-TW": {
+        "name": "zh-TW",
+        "format": "yyyy/M/d"
+    }
+}
