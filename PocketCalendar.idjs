@@ -1,6 +1,6 @@
 //An InDesign UXPScript
 
-
+const fs = require('fs');
 main();
 
 
@@ -16,7 +16,7 @@ function main(){
         weekBeginsAtMonday: true,
         year: 2023,
         year_table: {
-            border: "4px",
+            border: 4,
             colsW: { week : 55.5, mo: "252pt"},
             rowsH: { moName: "48pt", mo: "236pt", mid:"156pt"},
             order: {
@@ -33,15 +33,6 @@ function main(){
 
 /****  Dialog *****/
 
-function attachDropdown(attr){
-    let {paCol, myList, ind, label, labelW} = {...attr};
-    let row = paCol.dialogRows.add();
-    let col1 = row.dialogColumns.add();
-    col1.staticTexts.add({staticLabel: label, minWidth: labelW});
-    let col2 = row.dialogColumns.add();
-    var myValueElement = col2.dropdowns.add({stringList: myList, selectedIndex: ind});
-    return myValueElement;
-}
 function attachSideBySide(attr){
     let {leftCol, rightCol, labelW, inp: {label,  inputType, inputParam}} = {...attr};
     leftCol.staticTexts.add({staticLabel: label, minWidth: labelW});
@@ -59,43 +50,60 @@ function attachInputSet(attr){
     return myInputs.map(inp => attachSideBySide({ leftCol, rightCol, labelW: labelW, inp}));
 }
 
+function readJsonFile(fileName){
+    const stats = fs.lstatSync(fileName);
+    if(!stats.isFile()){ return []; }
+    let jsonFileContent = fs.readFileSync(fileName, {encoding: "utf-8"});
+    let meData = JSON.parse(jsonFileContent);
+    return meData;
+}
+
 function displayDialog(options){
     var myLabelWidth = 70;
     var myDialog = app.dialogs.add({name:"Pocket Calendar"});
-    var myPageNames = getHolidaysFormula();
-    let myLocales = ["cs_CZ","da_DK","de_DE","en_GB","es_ES","fi_FI","fr_FR","hu_HU","it_IT","ja_JP",
-        "ko_KR","nb_NO","nl_NL","pl_PL","pt_BT","ru_RU","sv_SE","tr_TR","uk_UA","zh_CN","zh_TW"];
+  
+    var holidays = getHolidaysFormula();
+
+    let localeKeys = readJsonFile("locale_InDesign_keys.json");
+    let localeData = readJsonFile("locale_key_name_dateFormat.json");
+    let myLanguages = [];
+    let myLocales = [];
+    for(let i=0; i < localeKeys.length; i++){
+        let locKey = localeKeys[i].replace('_','-');
+        if (localeData[locKey]){
+            myLanguages.push(localeData[locKey].name);
+            myLocales.push(locKey);
+        } else {
+            alert("Not familiar with " + locKey);
+        }
+    }
 
     let mainCol = myDialog.dialogColumns.add();
     let borderPanA = mainCol.borderPanels.add();
     let borderPanB = mainCol.borderPanels.add();
-    let borderPanC = mainCol.borderPanels.add();
 
-    let dColA = borderPanA.dialogColumns.add();
-    var myLocaleDropdown = attachDropdown({
-        paCol: dColA,
-        myList: myLocales,
-        ind: 3,
-        label: "Language:",
-        labelW: myLabelWidth
-    });
-    let mondayCheck = dColA.checkboxControls.add({staticLabel:"Week start on Monday", checkedState:true});
-    
-  
-    let inps = attachInputSet({pa: borderPanB, label: "Even Pages", labelW: myLabelWidth, 
+    let mainInps = attachInputSet({pa: borderPanA, label: "Select year and language:", labelW: myLabelWidth, 
         myInputs: [ 
-            {label:"Year:", inputType: "integerEditboxes", inputParam: {editValue: 2023}},
-            {label:"Border:", inputType: "measurementEditboxes", inputParam: {editValue: 4, editUnits:MeasurementUnits.points}}
+            {label:"Year:", inputType: "integerEditboxes", inputParam: {editValue: (new Date()).getFullYear()}},
+            {label:"Language:", inputType: "dropdowns", inputParam: {stringList: myLanguages, selectedIndex: 3}},
+            {label: "", inputType: "checkboxControls", inputParam: {checkedState:true, staticLabel: "Week start on Monday"}},
+        ]});
+      
+    let inps = attachInputSet({pa: borderPanB, label: "Appearance", labelW: myLabelWidth, 
+        myInputs: [ 
+            {label:"Border:", inputType: "measurementEditboxes", 
+                inputParam: {editValue: options.year_table.border, editUnits: MeasurementUnits.points}},
+            {label:"Week days:", inputType: "dropdowns", inputParam: {stringList: ["narrow", "short", "long"], selectedIndex: 1}},
         ]});
 
     var myResult = myDialog.show();
     if(myResult == true){
         // make an independent copy of options and modify it
         // validate all values
-        options.locale = myLocales[myLocaleDropdown.selectedIndex].replace('_','-');
-        options.mondayFirstBool = mondayCheck.checkedState;
-        options.year = inps[0].editValue;
-        options.year_table.border = inps[1].editValue;
+        options.locale = myLocales[mainInps[1].selectedIndex];
+        options.mondayFirstBool = mainInps[2].checkedState;
+        options.year = mainInps[0].editValue;
+        options.year_table.border = inps[0].editValue;
         if(true){
             myDialog.destroy();
             generateCalendar( options);
@@ -268,6 +276,7 @@ function generateCalendar( options){
 
     /***** Structural part (mostly) *****/
     var myTextFrame = myDocument.pages.item(0).textFrames.add({geometricBounds: ["36pt", "36pt", "1400pt", "940pt"]});
+    myTextFrame.textFramePreferences.autoSizingType = AutoSizingTypeEnum.HEIGHT_AND_WIDTH;
 
     var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
         appliedTableStyle: yearTableStyle,
@@ -388,7 +397,7 @@ function getShortWeekDayNames(loc, mondayFirstBool ){
     var wkD = new Date(firstDayStr);
     var week = [];
     for( let i=0; i<7; i++){
-        let wrd = wkD.toLocaleDateString(loc, { weekday: 'short' }); // narrow, sort, long
+        let wrd = wkD.toLocaleDateString(loc, { weekday: 'short' }); // narrow, short, long
         wrd = wrd.charAt(0).toUpperCase() +  (wrd.length > 1? wrd.slice(1) : '');
         week.push(wrd);
         wkD.setDate(wkD.getDate() + 1);
@@ -460,17 +469,7 @@ function federalHolidaysYear(year){
 }
 
 function getHolidaysFormula(){
-    return [{name: "New Year's Day", fixed: true, mo: 0, date: 1},
-        {name: "Birthday of Martin Luther King, Jr.", fixed: false, mo: 0, weekDay: 1, num: 2},
-        {name: "Washington's Birthday", fixed: false, mo: 1, weekDay: 1, num: 2},
-        {name: "Memorial Day", fixed: false, mo: 5, weekDay: 1, num: -1},
-        {name: "Juneteenth National Independence Day", fixed: true, mo: 5, date: 19},
-        {name: "Independence Day", fixed: true, mo: 6, date: 4 },
-        {name: "Labor Day", fixed: false, mo: 8, weekDay: 1, num: 0},
-        {name: "Columbus Day", fixed: false, mo: 9, weekDay: 1, num: 1 },
-        {name: "Veterans Day", fixed: true, mo: 10, date: 11 },
-        {name: "Thanksgiving Day", fixed: false, mo: 10, weekDay: 4, num: 3 },
-        {name: "Christmas Day", fixed: true, mo: 11, date: 25 }];
+    return  readJsonFile("federalHolidaysUSA.json");
 }
 
 function alert(msg) {

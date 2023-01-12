@@ -2008,23 +2008,23 @@
         "format": "yyyy/MM/dd"
     },
     "zh-CN": {
-        "name": "zh-CN",
+        "name": "Chinese (PRC)",
         "format": "yyyy/M/d"
     },
     "zh-HK": {
-        "name": "zh-HK",
+        "name": "Chinese (Hong Kong)",
         "format": "d/M/yyyy"
     },
     "zh-MO": {
-        "name": "zh-MO",
+        "name": "Chinese - Macau SAR",
         "format": "d/M/yyyy"
     },
     "zh-SG": {
-        "name": "zh-SG",
+        "name": "Chinese (Singapore)",
         "format": "d/M/yyyy"
     },
     "zh-TW": {
-        "name": "zh-TW",
+        "name": "Chinese (Taiwan)",
         "format": "yyyy/M/d"
     }
 }

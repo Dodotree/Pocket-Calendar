@@ -1,0 +1,13 @@
+[
+    {"name": "New Year's Day", "fixed": true, "mo": 0, "date": 1},
+    {"name": "Birthday of Martin Luther King, Jr.", "fixed": false, "mo": 0, "weekDay": 1, "num": 2},
+    {"name": "Washington's Birthday", "fixed": false, "mo": 1, "weekDay": 1, "num": 2},
+    {"name": "Memorial Day", "fixed": false, "mo": 5, "weekDay": 1, "num": -1},
+    {"name": "Juneteenth National Independence Day", "fixed": true, "mo": 5, "date": 19},
+    {"name": "Independence Day", "fixed": true, "mo": 6, "date": 4 },
+    {"name": "Labor Day", "fixed": false, "mo": 8, "weekDay": 1, "num": 0},
+    {"name": "Columbus Day", "fixed": false, "mo": 9, "weekDay": 1, "num": 1 },
+    {"name": "Veterans Day", "fixed": true, "mo": 10, "date": 11 },
+    {"name": "Thanksgiving Day", "fixed": false, "mo": 10, "weekDay": 4, "num": 3 },
+    {"name": "Christmas Day", "fixed": true, "mo": 11, "date": 25 }
+]
