@@ -59,6 +59,10 @@ function readJsonFile(fileName){
     let meData = JSON.parse(jsonFileContent);
     return meData;
 }
+function getHolidaysFormulaFiles(){
+    const paths = fs.readdirSync("holidays_formula");
+    console.log(paths);
+}
 
 function displayDialog(options){
     var myDialog = app.dialogs.add({name:"Pocket Calendar"});
@@ -66,6 +70,7 @@ function displayDialog(options){
     let localeKeys = readJsonFile("locale_InDesign_keys.json");
     let localeData = readJsonFile("locale_key_name_dateFormat.json");
     let hdays = getHolidaysFormula();
+    //getHolidaysFormulaFiles();
 
     let myLanguages = [];
     let myLocales = [];
@@ -138,61 +143,60 @@ function displayHolidaysDialog(options, hdFormula, num){
     let borderPanA = mainCol.borderPanels.add();
     let paCol = borderPanA.dialogColumns.add();
     let row = paCol.dialogRows.add();
-    row.staticTexts.add({staticLabel: "HOLIDAYS", minWidth: 300});
 
     let monthNameList = getMonthNames(options);
     let weekDaysList = getWeekDayNames(options);
 
     let holidayLines = [];
     for( let i=0; i<num; i++){
-        holidayLines.push([
-            { inputType: "textEditboxes", inputParam: {editContents: hdFormula[i].name}},
-            { inputType: "enablingGroups", inputParam: {checkedState: hdFormula[i].fixed, staticLabel: "fixed"}, 
+        holidayLines.push(
+            { inputType: "enablingGroups", inputParam: {checkedState: true, staticLabel: i + ". " + hdFormula[i].name},
                 inps: [
-                    { inputType: "dropdowns", inputParam: {stringList: monthNameList, selectedIndex: hdFormula[i].fixed ? hdFormula[i].mo : 0}},
-                    { inputType: "integerEditboxes", inputParam: {editValue: hdFormula[i].fixed ? hdFormula[i].date : 1}, staticLabel: "date" }
+                    { inputType: "textEditboxes", inputParam: {editContents: hdFormula[i].name, minWidth: 200}},
+                    { inputType: "enablingGroups", inputParam: {checkedState: hdFormula[i].fixed, staticLabel: "fixed"}, 
+                        inps: [
+                            { inputType: "dropdowns", inputParam: {stringList: monthNameList, selectedIndex: hdFormula[i].fixed ? hdFormula[i].mo : 0}},
+                            { inputType: "integerEditboxes", inputParam: {editValue: hdFormula[i].fixed ? hdFormula[i].date : 1}, staticLabel: "date" }
+                        ]
+                    },
+                    { inputType: "enablingGroups", inputParam: {checkedState: !hdFormula[i].fixed, staticLabel: "not fixed"}, 
+                        inps: [
+                            { inputType: "dropdowns", inputParam: {stringList: ["1 in month","2 in month","3 in month","4 in month","last in month"], selectedIndex: hdFormula[i].fixed ? 0: hdFormula[i].num}},
+                            { inputType: "dropdowns", inputParam: {stringList: weekDaysList, selectedIndex: hdFormula[i].fixed ? 1: hdFormula[i].weekDay - hdFormula[i].fixed}},
+                        ]
+                    },
                 ]
-            },
-            { inputType: "enablingGroups", inputParam: {checkedState: !hdFormula[i].fixed, staticLabel: "not fixed"}, 
-                inps: [
-                    { inputType: "dropdowns", inputParam: {stringList: ["1 in month","2 in month","3 in month","4 in month","last in month"], selectedIndex: hdFormula[i].fixed ? 0: hdFormula[i].num}},
-                    { inputType: "dropdowns", inputParam: {stringList: weekDaysList, selectedIndex: hdFormula[i].fixed ? 1: hdFormula[i].weekDay - hdFormula[i].fixed}},
-                ]
-            },
-        ]);
+            });
     }
 
-    function addInpCols(firstLevelFlag, paRow, inpLen){
+    function addInpCols(paRow, inpLen){
         let cols = [];
-        for(let i=0; i < inpLen + firstLevelFlag; i++){
+        for(let i=0; i < inpLen; i++){
             cols.push(paRow.dialogColumns.add());
         }
         return cols;
     }
 
-    function attachInputRow(firstLevelFlag, row, ind, cols, inps){
+    function attachInputRow(ind, cols, rowInps){
         let inpElms = [];
-
-        console.log( firstLevelFlag, ">>>" + inps.length + "<<<", ">>>" + cols.length + "<<<", JSON.stringify( inps ));
+        let inps = Array.isArray(rowInps) ? rowInps : [rowInps];
+        console.log(">>> inps LEN " + inps.length + "<<<", ">>>" + cols.length + "<<<"/*, JSON.stringify( inps )*/);
         console.log(cols[0].toSource());
 
-        if(firstLevelFlag){
-            cols[0].staticTexts.add({staticLabel: ind + '. ', minWidth: 20});
-        }
         for(let j=0; j < inps.length; j++){
-            console.log(j, ">>" + inps[j].inputType +"<<", cols[j + firstLevelFlag].toSource());
-            inpElms.push(cols[j + firstLevelFlag][inps[j].inputType].add(inps[j].inputParam));
-            if(inps[j].inputType == "enablingGroups" && inps[j].inps && Array.isArray(inps[j].inps)){
-                let colsR = addInpCols(0, inpElms[inpElms.length - 1], inps[j].inps.length);
-                let innerInpRows = attachInputRow(0, inpElms[inpElms.length - 1], 0, colsR, inps[j].inps);
+            console.log(j, ">> inps[j] TYPE " + inps[j].inputType +"<<", cols[j].toSource());
+            inpElms.push(cols[j][inps[j].inputType].add(inps[j].inputParam));
+            if(inps[j].inps && Array.isArray(inps[j].inps)){
+                let colsR = addInpCols(inpElms[inpElms.length - 1], inps[j].inps.length);
+                let innerInpRows = attachInputRow(0, colsR, inps[j].inps);
                 inpElms.concat(innerInpRows);
             }
         }
         return inpElms;
     }
 
-    let cols = addInpCols(1, row, holidayLines.length);
-    let inpRows = holidayLines.map((inps, ind) => attachInputRow(1, row, ind, cols, inps));
+    let cols = addInpCols(row, holidayLines.length);
+    let inpRows = holidayLines.map((inps, ind) => attachInputRow(ind, cols, inps));
 
     var myResult = myDialog.show();
     if(myResult == true){
@@ -492,7 +496,7 @@ function getWeekDayNames(attr){
 function getMonthNames(attr){
     let d = new Date("01/01/1973");
     let months = [];
-    for( let i=0; i<7; i++){
+    for( let i=0; i<12; i++){
         months.push(d.toLocaleString(attr.locale, { month: 'long' }));
         d.setDate(d.getDate() + 30);
     }
@@ -563,7 +567,7 @@ function federalHolidaysYear(year){
 }
 
 function getHolidaysFormula(){
-    return  readJsonFile("federalHolidaysUSA.json");
+    return  readJsonFile("holidays_formula\\federal_USA.json");
 }
 
 function alert(msg) {
