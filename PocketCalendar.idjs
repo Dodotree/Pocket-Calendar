@@ -1,6 +1,7 @@
 //An InDesign UXPScript
 
 const fs = require('fs');
+const localPath = getLocalPath();
 main();
 
 
@@ -17,16 +18,38 @@ function main(){
         weekBeginsAtMonday: true,
         weekDayShrotness: "short",
         year: 2023,
+        holidayFile: 'federal_USA.json',
+        props: {
+            day:{font: 31, t: 1, r: 4, b: 7, l: 5}, 
+            week: {font: 31, t:4, b: 4},
+            month: {font: 30, tracking: 50, t:4, b: 4},
+            year: {font: 155, leading: 131, l: 16},
+        },
         year_table: {
+            monthPa: {t:8},
             border: 4,
-            colsW: { week : 55.5, mo: "252pt"},
-            rowsH: { moName: "48pt", mo: "236pt", mid:"156pt"},
+            colsW: { week : 55.5, mo: 252},
+            rowsH: { moName: 48, mo: 236, mid: 156 },
             order: {
                 cols:["week", "mo", "mo", "mo", "week"],
                 rows: ["moName", "mo", "moName", "mo", "mid", "moName", "mo", "moName", "mo"]
             }
         },
     };
+
+    
+    let z = 0.165; // 0.165 credit card size // 0.157 business card
+    for( let it in options.props){
+        for( let sz in options.props[it]){
+            options.props[it][sz] *=z;
+        }
+    }
+    ["monthPa", "colsW", "rowsH"].forEach( it=>{
+        for( let sz in options.year_table[it]){
+            options.year_table[it][sz] *=z;
+        }       
+    });
+    options.year_table.border *=z;
 
     displayDialog(options);
 }
@@ -60,8 +83,7 @@ function readJsonFile(fileName){
     return meData;
 }
 function getHolidaysFormulaFiles(){
-    const paths = fs.readdirSync("holidays_formula");
-    console.log(paths);
+    return  fs.readdirSync(`file:${localPath}holidays_formula`);
 }
 
 function displayDialog(options){
@@ -69,8 +91,8 @@ function displayDialog(options){
 
     let localeKeys = readJsonFile("locale_InDesign_keys.json");
     let localeData = readJsonFile("locale_key_name_dateFormat.json");
-    let hdays = getHolidaysFormula();
-    //getHolidaysFormulaFiles();
+    
+    let holidaysOptions = getHolidaysFormulaFiles();
 
     let myLanguages = [];
     let myLocales = [];
@@ -85,8 +107,9 @@ function displayDialog(options){
     }
 
     let mainCol = myDialog.dialogColumns.add();
-    let borderPanA = mainCol.borderPanels.add();
-    let borderPanB = mainCol.borderPanels.add();
+    let topRow = mainCol.dialogRows.add();
+    let borderPanA = topRow.borderPanels.add();
+    let borderPanB = topRow.borderPanels.add();
     let borderPanC = mainCol.borderPanels.add();
 
     let mainInps = attachInputSet({pa: borderPanA, label: "YEAR AND LANGUAGE:", labelW: options.dialog.labelWidth, 
@@ -94,38 +117,45 @@ function displayDialog(options){
             {label:"Year:", inputType: "integerEditboxes", inputParam: {editValue: (new Date()).getFullYear()}},
             {label:"Language:", inputType: "dropdowns", inputParam: {stringList: myLanguages, selectedIndex: 3}},
             {label: "", inputType: "checkboxControls", inputParam: {checkedState:true, staticLabel: "Week start on Monday"}},
+            {label:"Week days:", inputType: "dropdowns", inputParam: {stringList: ["narrow", "short", "long"], selectedIndex: 1}},
+            {label: "", inputType: "checkboxControls", inputParam: {checkedState:false, staticLabel: "Highlight Saturdays"}},
+            {label: "", inputType: "checkboxControls", inputParam: {checkedState:true, staticLabel: "Highlight Sudays"}},
         ]});
 
-    
-    let inps2 = attachInputSet({pa: borderPanB, label: "HOLIDAYS", labelW: options.dialog.labelWidth, 
+    let inps2 = attachInputSet({pa: borderPanB, label: "HOLIDAYS:", labelW: options.dialog.labelWidth, 
         myInputs: [ 
-            {label:"Country:", inputType: "dropdowns", inputParam: {stringList: ["Federal, USA", "Custom"], selectedIndex: 0}},
-            {label:"Number of days per year:", inputType: "integerEditboxes", inputParam: {editValue: hdays.length}},
-            {label: "Open holidays dialog", inputType: "checkboxControls", inputParam: {checkedState: false, staticLabel: ""}},
+            {label:"Country:", inputType: "dropdowns", inputParam: {stringList: holidaysOptions, selectedIndex: 0}},
+            {label:"In one year:", inputType: "integerEditboxes", inputParam: {editValue: 11}},
+            {label: "Edit holidays", inputType: "checkboxControls", inputParam: {checkedState: false, staticLabel: ""}},
+            {label: "Create custom", inputType: "checkboxControls", inputParam: {checkedState: false, staticLabel: ""}},
         ]});
 
-    let inps = attachInputSet({pa: borderPanC, label: "APPEARANCE", labelW: options.dialog.labelWidth, 
+    let inps = attachInputSet({pa: borderPanC, label: "APPEARANCE:", labelW: options.dialog.labelWidth, 
         myInputs: [ 
             {label:"Border:", inputType: "measurementEditboxes", 
                 inputParam: {editValue: options.year_table.border, editUnits: MeasurementUnits.points}},
-            {label:"Week days:", inputType: "dropdowns", inputParam: {stringList: ["narrow", "short", "long"], selectedIndex: 1}},
         ]});
 
     var myResult = myDialog.show();
     if(myResult == true){
         // make an independent copy of options and modify it
         // validate all values
+        options.year = mainInps[0].editValue;
         options.locale = myLocales[mainInps[1].selectedIndex];
         options.weekBeginsAtMonday = mainInps[2].checkedState;
-        options.year = mainInps[0].editValue;
+        options.weekDayShrotness = ["narrow", "short", "long"][mainInps[3].selectedIndex];
+        
         options.year_table.border = inps[0].editValue;
+
         let numOfHolidays = inps2[1].editValue;
+        options.holidayFile = holidaysOptions[inps2[0].selectedIndex];
+
         if(!inps2[2].checkedState){
             myDialog.destroy();
             generateCalendar( options);
         }else if(inps2[2].checkedState){
             myDialog.destroy();
-            displayHolidaysDialog(options, hdays, numOfHolidays);         
+            displayHolidaysDialog(options, numOfHolidays);         
         } else {
             myDialog.destroy();
             alert("Failed validation");
@@ -136,8 +166,9 @@ function displayDialog(options){
     }
 }
 
-function displayHolidaysDialog(options, hdFormula, num){
+function displayHolidaysDialog(options, num){
     var myDialog = app.dialogs.add({name:"Calendar Holidays"});
+    let hdFormula = getHolidaysFormula(options.holidayFile);
 
     let mainCol = myDialog.dialogColumns.add();
     let borderPanA = mainCol.borderPanels.add();
@@ -212,14 +243,14 @@ function generateCalendar( options){
     myDocument.name = "Pocket Calendar " + options.year;
     myDocument.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
     myDocument.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
-    myDocument.documentPreferences.properties = {pageWidth: 1000, pageHeight: 1800};
+    myDocument.documentPreferences.properties = {pageWidth: 792, pageHeight: 612};
     myDocument.colors.add({name:"Red", model: ColorModel.process, colorValue:[0,90,53,0]});
 
     var dayFontStyle = myDocument.paragraphStyles.add({
         name:"Day Font",
         appliedFont: "Neue Haas Unica W1G",
         fontStyle: "Medium",
-        pointSize: 31, /* leading 36 */
+        pointSize: options.props.day.font, /* leading 36 */
         justification: Justification.RIGHT_ALIGN,
     });
 
@@ -227,7 +258,7 @@ function generateCalendar( options){
         name:"Week Font",
         appliedFont: "Neue Haas Unica W1G",
         fontStyle: "Bold",
-        pointSize: 31,
+        pointSize: options.props.week.font,
         justification: Justification.LEFT_ALIGN,
     });
 
@@ -235,9 +266,9 @@ function generateCalendar( options){
         name:"Month Font",
         appliedFont: "Neue Haas Unica W1G",
         fontStyle: "Bold",
-        pointSize: 30,
+        pointSize: options.props.month.font,
         kerningMethod: "Optical",
-        tracking: 50,
+        tracking: options.props.month.tracking,
         justification: Justification.CENTER_ALIGN,
     });
 
@@ -245,8 +276,8 @@ function generateCalendar( options){
         name:"Year Font",
         appliedFont: "Abril fatface", //"Blenny" //"Gravitas One",
         //fontStyle: "Black",
-        pointSize: 155, // 162,
-        leading: 131,
+        pointSize: options.props.year.font, // 162,
+        leading: options.props.year.leading,
         kerningMethod: "Optical",
         tracking: 0, // -70,
         fillColor: myDocument.colors.item("Red"),
@@ -259,36 +290,47 @@ function generateCalendar( options){
         fillColor: myDocument.colors.item("Red"),
     });
 
-    var dayCellStyle = myDocument.cellStyles.add({
+    // for days of the months smaller tables inside year table
+    var moTableDayCellStyle = myDocument.cellStyles.add({
         name:"Day Cell",
         appliedParagraphStyle: dayFontStyle,
-        textTopInset: "1px",
-        textRightInset: "4pt",
-        textBottomInset: "7pt",
-        textLeftInset: "5pt",
+        textTopInset: options.props.day.t,
+        textRightInset: options.props.day.r,
+        textBottomInset: options.props.day.b,
+        textLeftInset: options.props.day.l,
         verticalJustification: VerticalJustification.CENTER_ALIGN
     });
 
     var highlightDayCellStyle = myDocument.cellStyles.add({
         name:"Highlight Day Cell",
+        basedOn: moTableDayCellStyle, 
         appliedParagraphStyle: dayHighlightFontStyle,
     });
 
+    // for small tables with week day names
     var weekDayCellStyle = myDocument.cellStyles.add({
         name:"Week Day Names Cell",
-        basedOn: dayCellStyle,
+        basedOn: moTableDayCellStyle,
         appliedParagraphStyle: weekFontStyle,
-        textTopInset: "4px",
-        textBottomInset: "4pt",
+        textTopInset: options.props.week.t,
+        textBottomInset: options.props.week.b,
     });
 
+    // canceling most defaults style for all year table body cells
     var yearCellStyle = myDocument.cellStyles.add({
         name:"Year Cell",
-        basedOn: dayCellStyle,
         appliedParagraphStyle: monthFontStyle,
         textTopInset: 0,
         textRightInset: 0,
         textBottomInset: 0,
+        textLeftInset: 0,
+        verticalJustification: VerticalJustification.CENTER_ALIGN
+    });
+
+    // for cell of the year table that will hold table with week day names
+    var weekTablePaCellStyle = myDocument.cellStyles.add({
+        name:"Week Cell",
+        basedOn: yearCellStyle,
     });
 
     var monthNameCellStyle = myDocument.cellStyles.add({
@@ -297,29 +339,26 @@ function generateCalendar( options){
         appliedParagraphStyle: monthFontStyle,
     });
 
-    var monthCellStyle = myDocument.cellStyles.add({
+    // for cell of the year table that will hold all days of the month table
+    var moTablePaCellStyle = myDocument.cellStyles.add({
         name:"Month Cell",
         basedOn: yearCellStyle,
-        textTopInset: "8px",
+        textTopInset: options.year_table.monthPa.t,
     });
 
+    // where year is written
     var middleCellStyle = myDocument.cellStyles.add({
         name:"Middle Cell",
         basedOn: yearCellStyle,
         appliedParagraphStyle: yearFontStyle,
         firstBaselineOffset: FirstBaseline.LEADING_OFFSET,
         verticalJustification: VerticalJustification.JUSTIFY_ALIGN,
-        textLeftInset: "16pt",
-    });
-
-    var weekCellStyle = myDocument.cellStyles.add({
-        name:"Week Cell",
-        basedOn: yearCellStyle,
+        textLeftInset: options.props.year.l,
     });
 
     var moTableStyle = myDocument.tableStyles.add({
         name:"Month Table Style",
-        bodyRegionCellStyle: dayCellStyle,
+        bodyRegionCellStyle: moTableDayCellStyle,
         spaceBefore: 0,
         spaceAfter: 0,
         leftBorderStrokeWeight: 0,
@@ -363,8 +402,9 @@ function generateCalendar( options){
     });
 
     /***** Structural part (mostly) *****/
-    var myTextFrame = myDocument.pages.item(0).textFrames.add({geometricBounds: ["36pt", "36pt", "1400pt", "940pt"]});
+    var myTextFrame = myDocument.pages.item(0).textFrames.add({geometricBounds: ["36pt", "36pt", "300pt", "200pt"]});
     myTextFrame.textFramePreferences.autoSizingType = AutoSizingTypeEnum.HEIGHT_AND_WIDTH;
+    myTextFrame.textFramePreferences.autoSizingReferencePoint = AutoSizingReferenceEnum.TOP_LEFT_POINT;
 
     var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
         appliedTableStyle: yearTableStyle,
@@ -385,7 +425,7 @@ function generateCalendar( options){
     [0,4].forEach((col)=>{
         [1,3,6,8].forEach((row)=>{
             let weekCell = yearTable.columns.item(col).cells.item(row);
-            weekCell.appliedCellStyle = weekCellStyle;
+            weekCell.appliedCellStyle = weekTablePaCellStyle;
             let weekTbl = weekCell.tables.add({
                 appliedTableStyle: weekTableStyle,
                 bodyRowCount : 7,
@@ -398,7 +438,7 @@ function generateCalendar( options){
     });
 
     var d= new Date(options.year, 0, 1);
-    const holidays = federalHolidaysYear(options.year);
+    const holidays = federalHolidaysYear(options.year, options.holidayFile);
 
     while (d.getFullYear() == options.year) {
         let mo = d.getMonth();
@@ -441,7 +481,7 @@ function generateCalendar( options){
         let tblW = ((cols<6)? 5*options.daysCol : 6* options.daysCol);
 
         let monthCell = yearTable.rows.item(yearTableRow +1).cells.item(yearTableCol);
-        monthCell.appliedCellStyle = monthCellStyle;
+        monthCell.appliedCellStyle = moTablePaCellStyle;
         let moTable = monthCell.tables.add({
             appliedTableStyle: moTableStyle,
             bodyRowCount : 7,
@@ -548,26 +588,62 @@ function measureColMinW(tblStyle, textLines, doc){
     return minColW  + rightInset + leftInset; 
 }
 
-function federalHolidaysYear(year){
+function dumpVars(vrs){
+    vrs.forEach(vr =>{
+        console.log(">" + JSON.stringify(vr, null, 4));
+    });
+}
+
+function federalHolidaysYear(year, holidayFile){
     /* Month counts from 0, week counts from Sunday 0, week day number in the month also from 0 */
     /* "Last week day on the month" is the next month week day with num=-1 */  
-    var holidays = getHolidaysFormula();
+    var holidays = getHolidaysFormula(holidayFile);
+    let easterArr = easterDateLLongre(year);
 
     var months = Array(12).fill(0).map(x=>[]);
     holidays.forEach(h=>{
+        console.log("\n\n\n>>> DUMP h >>>>");
+        dumpVars([h]);
         if (h.fixed){
+            console.log("\n\n\n>>>> fixed >>>");
             months[h.mo].push( h.date );
-        }else {
+        } else if (h.easter !== undefined){
+            console.log("\n\n\n>>>> easter >>>", JSON.stringify(easterArr));
+            let dt = new Date(year, easterArr[1]-1, easterArr[2] + h.easter);
+            console.log("=====>", dt.toUTCString());
+            months[ dt.getMonth() ].push( dt.getDate() );          
+        } else {
+            console.log("\n\n\n>>>> month >>>");
             let dif = (7 + h.weekDay - new Date(year, h.mo, 0).getDay() ) % 7;
             let dt = new Date(year, h.mo, dif + 7*h.num);
+            console.log("=====>", dt.toUTCString());
             months[ dt.getMonth() ].push( dt.getDate() );
         }
     });
     return months;
 }
 
-function getHolidaysFormula(){
-    return  readJsonFile("holidays_formula\\federal_USA.json");
+
+// https://stackoverflow.com/questions/1284314/easter-date-in-javascript
+// Using the 'Laurent Longre' Algorithm
+
+function easterDateLLongre(Y) {
+    // ~~ = Math.trunc
+    let M=3, 
+        G= Y % 19+1, // golden
+        C= ~~(Y/100)+1, // century
+        L=~~((3*C)/4)-12, // leap day correction
+        E=(11*G+20+ ~~((8*C+5)/25)-5-L)%30, // epact
+        D;
+    E<0 && (E+=30);
+    (E==25 && G>11 || E==24) && E++;
+    (D=44-E)<21 && (D+=30);
+    (D+=7-(~~((5*Y)/4)-L-10+D)%7)>31 && (D-=31,M=4);
+    return [Y, M, D];
+}
+
+function getHolidaysFormula(name){
+    return  readJsonFile(`holidays_formula\\${name}`);
 }
 
 function alert(msg) {
@@ -579,4 +655,12 @@ function alert(msg) {
     theDialog.show();
     theDialog.destroy();
     return;
+}
+
+function getLocalPath(){
+    let scriptPath = app.activeScript;
+    if (/\//.test(scriptPath)) {
+        return scriptPath.replace(/(.*\/).*$/, "$1");
+    }
+    return scriptPath.replace(/(.*\\).*$/, "$1");
 }
