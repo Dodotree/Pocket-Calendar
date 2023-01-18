@@ -8,7 +8,8 @@
     {"name": "Lundi de Pentecôte, Whit Monday", "fixed": false, "easter": 50},
     {"name": "Bastille Day", "fixed": true, "mo": 5, "date": 14 },
     {"name": "Assumption Day", "fixed": true, "mo": 7, "date": 15 },
-    {"name": "All Saints' Day", "fixed": true, "mo": 10, "date": 1 },
+    {"name": "Toussaint, All Saints' Day", "fixed": true, "mo": 10, "date": 1 },
+    {"name": "Armistice", "fixed": true, "mo": 10, "date": 11 },
     {"name": "Christmas Day, Noël", "fixed": true, "mo": 11, "date": 25 },
     {"name": "Saint Etienne, Saint Stephen's Day", "fixed": true, "mo": 11, "date": 26 }
 ]

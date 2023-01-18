@@ -19,11 +19,18 @@ function main(){
         weekDayShrotness: "short",
         year: 2023,
         holidayFile: 'federal_USA.json',
+        scale: 0.162, // 0.165 credit card size // 0.157 business card
         props: {
             day:{font: 31, t: 1, r: 4, b: 7, l: 5}, 
             week: {font: 31, t:4, b: 4},
             month: {font: 30, tracking: 50, t:4, b: 4},
             year: {font: 155, leading: 131, l: 16},
+        },
+        fonts: {
+            day: {face: "Neue Haas Unica W1G", weight: "Medium"},
+            week: {face: "Neue Haas Unica W1G", weight: "Bold"},
+            month: {face: "Neue Haas Unica W1G", weight: "Bold"},
+            year: {face: "Blenny", weight: "Black"},
         },
         year_table: {
             monthPa: {t:8},
@@ -36,20 +43,6 @@ function main(){
             }
         },
     };
-
-    
-    let z = 0.165; // 0.165 credit card size // 0.157 business card
-    for( let it in options.props){
-        for( let sz in options.props[it]){
-            options.props[it][sz] *=z;
-        }
-    }
-    ["monthPa", "colsW", "rowsH"].forEach( it=>{
-        for( let sz in options.year_table[it]){
-            options.year_table[it][sz] *=z;
-        }       
-    });
-    options.year_table.border *=z;
 
     displayDialog(options);
 }
@@ -75,15 +68,19 @@ function attachInputSet(attr){
     return myInputs.map(inp => attachSideBySide({ leftCol, rightCol, labelW, inp}));
 }
 
-function readJsonFile(fileName){
-    const stats = fs.lstatSync(fileName);
-    if(!stats.isFile()){ return []; }
-    let jsonFileContent = fs.readFileSync(fileName, {encoding: "utf-8"});
-    let meData = JSON.parse(jsonFileContent);
-    return meData;
+function getAvailableFontIndex(fonts, ft){
+    let subs = [`Helvetica\t${ft.weigh}`, `Helvetica Neue\t${ft.weigh}`, "Helvetica\tBold", "Helvetica Neue\tBold", `Tahoma\t${ft.weigh}`, "Tahoma\tBold", `Arial\t${ft.weigh}`, "Arial\tBold"];
+    let ind = fonts.indexOf(`${ft.face}\t${ft.weight}`);
+    while( ind == -1 ){
+        ind = fonts.indexOf(subs.shift());
+    }
+    return Math.max(ind, 0);
 }
-function getHolidaysFormulaFiles(){
-    return  fs.readdirSync(`file:${localPath}holidays_formula`);
+function getFontFromInp(fontInp, fonts){
+    let ind = fontInp.selectedIndex;
+    let ft =  fonts[ind].split("\t");
+    // It's safer to set the font by its index since in case of Blenny Black it throws "not available" error if set by name
+    return {index: ind, face: ft[0], weight: ft.length > 1 ? ft[1]: null};
 }
 
 function displayDialog(options){
@@ -92,7 +89,7 @@ function displayDialog(options){
     let localeKeys = readJsonFile("locale_InDesign_keys.json");
     let localeData = readJsonFile("locale_key_name_dateFormat.json");
     
-    let holidaysOptions = getHolidaysFormulaFiles();
+    let holidaysOptions = fs.readdirSync(`file:${localPath}holidays_formula`);
 
     let myLanguages = [];
     let myLocales = [];
@@ -105,6 +102,12 @@ function displayDialog(options){
             alert("Not familiar with " + locKey);
         }
     }
+
+    let fonts = app.fonts.everyItem().getElements().map(ft=>ft.name);
+    let dayFont = getAvailableFontIndex(fonts, options.fonts.day );
+    let weekFont = getAvailableFontIndex(fonts, options.fonts.week );
+    let monthFont = getAvailableFontIndex(fonts, options.fonts.month );
+    let yearFont = getAvailableFontIndex(fonts, options.fonts.year );
 
     let mainCol = myDialog.dialogColumns.add();
     let topRow = mainCol.dialogRows.add();
@@ -132,8 +135,13 @@ function displayDialog(options){
 
     let inps = attachInputSet({pa: borderPanC, label: "APPEARANCE:", labelW: options.dialog.labelWidth, 
         myInputs: [ 
+            {label:"Scale:", inputType: "realEditboxes", inputParam: {editValue: options.scale}},
+            {label:"Day Font:", inputType: "dropdowns", inputParam: {stringList: fonts, selectedIndex: dayFont}},
+            {label:"Week Font:", inputType: "dropdowns", inputParam: {stringList: fonts, selectedIndex: weekFont}},
+            {label:"Month Font:", inputType: "dropdowns", inputParam: {stringList: fonts, selectedIndex: monthFont}},
+            {label:"Year Font:", inputType: "dropdowns", inputParam: {stringList: fonts, selectedIndex: yearFont}},
             {label:"Border:", inputType: "measurementEditboxes", 
-                inputParam: {editValue: options.year_table.border, editUnits: MeasurementUnits.points}},
+                inputParam: {editValue: options.year_table.border, editUnits: MeasurementUnits.points}},           
         ]});
 
     var myResult = myDialog.show();
@@ -145,10 +153,27 @@ function displayDialog(options){
         options.weekBeginsAtMonday = mainInps[2].checkedState;
         options.weekDayShrotness = ["narrow", "short", "long"][mainInps[3].selectedIndex];
         
-        options.year_table.border = inps[0].editValue;
-
         let numOfHolidays = inps2[1].editValue;
         options.holidayFile = holidaysOptions[inps2[0].selectedIndex];
+
+        options.scale = inps[0].editValue;
+        options.fonts.day = getFontFromInp(inps[1], fonts);
+        options.fonts.week = getFontFromInp(inps[2], fonts);
+        options.fonts.month = getFontFromInp(inps[3], fonts);
+        options.fonts.year = getFontFromInp(inps[4], fonts);
+        options.year_table.border = inps[5].editValue;
+
+        for( let it in options.props){
+            for( let sz in options.props[it]){
+                options.props[it][sz] *=options.scale;
+            }
+        }
+        ["monthPa", "colsW", "rowsH"].forEach( it=>{
+            for( let sz in options.year_table[it]){
+                options.year_table[it][sz] *=options.scale;
+            }       
+        });
+        options.year_table.border *=options.scale;
 
         if(!inps2[2].checkedState){
             myDialog.destroy();
@@ -168,7 +193,7 @@ function displayDialog(options){
 
 function displayHolidaysDialog(options, num){
     var myDialog = app.dialogs.add({name:"Calendar Holidays"});
-    let hdFormula = getHolidaysFormula(options.holidayFile);
+    let hdFormula = readJsonFile(`holidays_formula\\${options.holidayFile}`);
 
     let mainCol = myDialog.dialogColumns.add();
     let borderPanA = mainCol.borderPanels.add();
@@ -237,9 +262,11 @@ function displayHolidaysDialog(options, num){
 }
 /****  End of dialog *****/
 
-function generateCalendar( options){
+
+function generateCalendar(options){
 
     var myDocument = app.documents.add();
+    //app.activeDocument = myDocument;
     myDocument.name = "Pocket Calendar " + options.year;
     myDocument.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
     myDocument.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
@@ -248,24 +275,21 @@ function generateCalendar( options){
 
     var dayFontStyle = myDocument.paragraphStyles.add({
         name:"Day Font",
-        appliedFont: "Neue Haas Unica W1G",
-        fontStyle: "Medium",
+        appliedFont: app.fonts.item(options.fonts.day.index),
         pointSize: options.props.day.font, /* leading 36 */
         justification: Justification.RIGHT_ALIGN,
     });
 
     var weekFontStyle = myDocument.paragraphStyles.add({
         name:"Week Font",
-        appliedFont: "Neue Haas Unica W1G",
-        fontStyle: "Bold",
+        appliedFont: app.fonts.item(options.fonts.week.index),
         pointSize: options.props.week.font,
         justification: Justification.LEFT_ALIGN,
     });
 
     var monthFontStyle = myDocument.paragraphStyles.add({
         name:"Month Font",
-        appliedFont: "Neue Haas Unica W1G",
-        fontStyle: "Bold",
+        appliedFont: app.fonts.item(options.fonts.month.index),
         pointSize: options.props.month.font,
         kerningMethod: "Optical",
         tracking: options.props.month.tracking,
@@ -274,8 +298,7 @@ function generateCalendar( options){
 
     var yearFontStyle = myDocument.paragraphStyles.add({
         name:"Year Font",
-        appliedFont: "Abril fatface", //"Blenny" //"Gravitas One",
-        //fontStyle: "Black",
+        appliedFont: app.fonts.item(options.fonts.year.index), //"Abril fatface, Regular", //"Blenny, Black" //"Gravitas One",
         pointSize: options.props.year.font, // 162,
         leading: options.props.year.leading,
         kerningMethod: "Optical",
@@ -402,9 +425,25 @@ function generateCalendar( options){
     });
 
     /***** Structural part (mostly) *****/
-    var myTextFrame = myDocument.pages.item(0).textFrames.add({geometricBounds: ["36pt", "36pt", "300pt", "200pt"]});
+    let myPage = myDocument.pages.item(0);
+    let myLayer = myDocument.layers.item(0);
+    myLayer.name = "Calendars";
+
+    var frmLayer = myDocument.layers.add({name:"Frames"});
+    frmLayer.move(LocationOptions.AT_END);
+    let frm = myPage.rectangles.add({
+        strokeWeight: 0.25, 
+        fillColor: myDocument.swatches.item('None'),
+        strokeColor: myDocument.swatches.item('Black'),
+        geometricBounds: [0, 0, 245, 156]
+    });
+    frm.itemLayer = frmLayer;
+    stepAndRepeatEvenly(4, 2, myDocument, myPage, frm);
+
+    var myTextFrame = myPage.textFrames.add({geometricBounds: ["36pt", "36pt", "300pt", "200pt"]});
     myTextFrame.textFramePreferences.autoSizingType = AutoSizingTypeEnum.HEIGHT_AND_WIDTH;
     myTextFrame.textFramePreferences.autoSizingReferencePoint = AutoSizingReferenceEnum.TOP_LEFT_POINT;
+    myTextFrame.itemLayer = myLayer;
 
     var yearTable = myTextFrame.insertionPoints.item(-1).tables.add({
         appliedTableStyle: yearTableStyle,
@@ -515,10 +554,53 @@ function generateCalendar( options){
     middleCell.appliedCellStyle = middleCellStyle;
     middleCell.contents = options.year.toString();
 
+    app.waitForAllTasks();
+
+    stepAndRepeatEvenly(4,2, myDocument, myPage, myTextFrame);
+
+    let myBackPage = myDocument.pages.add();
+    let imgLayer = myDocument.layers.add({name:"Images"});
+    let errMargin = 4;
+
+    let imgFrm = myBackPage.rectangles.add({
+        strokeWeight: 0.25, 
+        fillColor: myDocument.swatches.item('None'),
+        strokeColor: myDocument.swatches.item('Black'),
+        geometricBounds: [0, 0, 245 + errMargin, 156 + errMargin]
+    });
+    imgFrm.itemLayer = imgLayer;
+
+    // imgFrm.place("C:\\Users\\Ooo\\Desktop\\Rabbit_year_calendar.png");
+    stepAndRepeatEvenly(4, 2, myDocument, myBackPage, imgFrm);
 }
 
 
 /****  Functions *****/
+
+function stepAndRepeatEvenly(nx, ny, doc, pg, inst){
+    if(0 == nx || 0 == ny){ console.log("Error: function StepAndRepeatEvenly got 0 in argumens.");}
+    // doc.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
+    // doc.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
+    // var myOldRulerOrigin = doc.viewPreferences.rulerOrigin;
+    // app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.pageOrigin;
+    // app.activeDocument.zeroPoint = [0,0];
+
+    let instBox = inst.geometricBounds;
+    let instW = instBox[3] - instBox[1];
+    let instH = instBox[2] - instBox[0];
+    let pgH = doc.documentPreferences.pageHeight;
+    let pgW = doc.documentPreferences.pageWidth;
+    let pgMarginPrefs = pg.marginPreferences;
+    let wGap = (pgW - nx*instW - (pgMarginPrefs.left + pgMarginPrefs.right))/nx;
+    let hGap = (pgH - ny*instH - (pgMarginPrefs.top + pgMarginPrefs.bottom))/ny;
+
+    console.log(pgH, pgW, instW, instH, JSON.stringify(pgMarginPrefs.getElements()), wGap, hGap);
+
+    inst.move([pgMarginPrefs.left + wGap/2, pgMarginPrefs.top + hGap/2]);
+    for(let i=1; i<nx*ny; i++){
+        inst.duplicate().move([pgMarginPrefs.left + wGap/2 + i%nx*(instW+wGap), pgMarginPrefs.top + Math.floor(i/nx)*(instH + hGap) + hGap/2]);
+    }
+}
 
 function getWeekDayNames(attr){
     let {locale, weekBeginsAtMonday, weekDayShrotness} = {...attr};
@@ -588,35 +670,24 @@ function measureColMinW(tblStyle, textLines, doc){
     return minColW  + rightInset + leftInset; 
 }
 
-function dumpVars(vrs){
-    vrs.forEach(vr =>{
-        console.log(">" + JSON.stringify(vr, null, 4));
-    });
-}
+
 
 function federalHolidaysYear(year, holidayFile){
     /* Month counts from 0, week counts from Sunday 0, week day number in the month also from 0 */
     /* "Last week day on the month" is the next month week day with num=-1 */  
-    var holidays = getHolidaysFormula(holidayFile);
+    var holidays = readJsonFile(`holidays_formula\\${holidayFile}`);
     let easterArr = easterDateLLongre(year);
 
     var months = Array(12).fill(0).map(x=>[]);
     holidays.forEach(h=>{
-        console.log("\n\n\n>>> DUMP h >>>>");
-        dumpVars([h]);
         if (h.fixed){
-            console.log("\n\n\n>>>> fixed >>>");
             months[h.mo].push( h.date );
         } else if (h.easter !== undefined){
-            console.log("\n\n\n>>>> easter >>>", JSON.stringify(easterArr));
             let dt = new Date(year, easterArr[1]-1, easterArr[2] + h.easter);
-            console.log("=====>", dt.toUTCString());
             months[ dt.getMonth() ].push( dt.getDate() );          
         } else {
-            console.log("\n\n\n>>>> month >>>");
             let dif = (7 + h.weekDay - new Date(year, h.mo, 0).getDay() ) % 7;
             let dt = new Date(year, h.mo, dif + 7*h.num);
-            console.log("=====>", dt.toUTCString());
             months[ dt.getMonth() ].push( dt.getDate() );
         }
     });
@@ -642,10 +713,6 @@ function easterDateLLongre(Y) {
     return [Y, M, D];
 }
 
-function getHolidaysFormula(name){
-    return  readJsonFile(`holidays_formula\\${name}`);
-}
-
 function alert(msg) {
     let theDialog = app.dialogs.add();
     let col = theDialog.dialogColumns.add();
@@ -656,6 +723,11 @@ function alert(msg) {
     theDialog.destroy();
     return;
 }
+function dumpVars(vrs){
+    vrs.forEach(vr =>{
+        console.log(">" + JSON.stringify(vr, null, 4));
+    });
+}
 
 function getLocalPath(){
     let scriptPath = app.activeScript;
@@ -663,4 +735,12 @@ function getLocalPath(){
         return scriptPath.replace(/(.*\/).*$/, "$1");
     }
     return scriptPath.replace(/(.*\\).*$/, "$1");
+}
+
+function readJsonFile(fileName){
+    const stats = fs.lstatSync(fileName);
+    if(!stats.isFile()){ return []; }
+    let jsonFileContent = fs.readFileSync(fileName, {encoding: "utf-8"});
+    let meData = JSON.parse(jsonFileContent);
+    return meData;
 }
