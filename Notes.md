@@ -46,6 +46,7 @@ myTextFrame.insertionPoints.item(-1)
 To iterate in bulk, you have to get `.everyItem().getElements()`, which will turn the collection into an array, where
 `everyItem ()` Returns every Cell in the collection
 `getElements ()` Resolves the object specifier, creating an array of object references.
+https://community.adobe.com/t5/indesign-discussions/adjust-column-width-in-tables/m-p/6631680
 
 You can have a table in the table. The column width does not adjust to the content. Columns initially fill the space evenly. If you decrease the width of 1 column, it will decrease the width of the whole table. It's better to set the table so that the column width is enough to fit the widest column and then decrease them one by one. Row height, though, will adjust automatically unless you will flag it as not adjustable and set the height. But row height will not change automatically if you change text leading, unlike with CSS font line height.
 
@@ -67,4 +68,7 @@ async function main() {
     });
 }
 ```
+
+Cloning, replicating, or copy-pasting objects is called `obj.duplicate()` and works much better than attempts to use app.copy() app.paste()
+
 (to be continued)

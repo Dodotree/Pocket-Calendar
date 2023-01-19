@@ -2,49 +2,54 @@
 
 const fs = require('fs');
 const localPath = getLocalPath();
-main();
+
+await main();
 
 
 
 /****  main() *****/
+async function main() {
+    return new Promise(async(resolve, reject) => {
 
-function main(){
-    //Make certain that user interaction (display of dialogs, etc.) is turned on.
-    app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
+        //Make certain that user interaction (display of dialogs, etc.) is turned on.
+        app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
     
-    var options = {
-        dialog: {labelWidth: 70},
-        locale: 'en-US', /* default */
-        weekBeginsAtMonday: true,
-        weekDayShrotness: "short",
-        year: 2023,
-        holidayFile: 'federal_USA.json',
-        scale: 0.162, // 0.165 credit card size // 0.157 business card
-        props: {
-            day:{font: 31, t: 1, r: 4, b: 7, l: 5}, 
-            week: {font: 31, t:4, b: 4},
-            month: {font: 30, tracking: 50, t:4, b: 4},
-            year: {font: 155, leading: 131, l: 16},
-        },
-        fonts: {
-            day: {face: "Neue Haas Unica W1G", weight: "Medium"},
-            week: {face: "Neue Haas Unica W1G", weight: "Bold"},
-            month: {face: "Neue Haas Unica W1G", weight: "Bold"},
-            year: {face: "Blenny", weight: "Black"},
-        },
-        year_table: {
-            monthPa: {t:8},
-            border: 4,
-            colsW: { week : 55.5, mo: 252},
-            rowsH: { moName: 48, mo: 236, mid: 156 },
-            order: {
-                cols:["week", "mo", "mo", "mo", "week"],
-                rows: ["moName", "mo", "moName", "mo", "mid", "moName", "mo", "moName", "mo"]
-            }
-        },
-    };
+        var options = {
+            dialog: {labelWidth: 70},
+            locale: 'en-US', /* default */
+            weekBeginsAtMonday: true,
+            weekDayShrotness: "short",
+            year: 2023,
+            holidayFile: 'federal_USA.json',
+            scale: 0.162, // 0.165 credit card size // 0.157 business card
+            props: {
+                day:{font: 31, t: 1, r: 4, b: 7, l: 5}, 
+                week: {font: 31, t:4, b: 4},
+                month: {font: 30, tracking: 50, t:4, b: 4},
+                year: {font: 155, leading: 131, l: 16},
+            },
+            fonts: {
+                day: {face: "Neue Haas Unica W1G", weight: "Medium"},
+                week: {face: "Neue Haas Unica W1G", weight: "Bold"},
+                month: {face: "Neue Haas Unica W1G", weight: "Bold"},
+                year: {face: "Blenny", weight: "Black"},
+            },
+            year_table: {
+                monthPa: {t:8},
+                border: 4,
+                colsW: { week : 55.5, mo: 252},
+                rowsH: { moName: 48, mo: 236, mid: 156 },
+                order: {
+                    cols:["week", "mo", "mo", "mo", "week"],
+                    rows: ["moName", "mo", "moName", "mo", "mid", "moName", "mo", "moName", "mo"]
+                }
+            },
+        };
 
-    displayDialog(options);
+        displayDialog(options);
+
+        resolve();
+    });
 }
 
 /****  End of main() *****/
@@ -260,19 +265,21 @@ function displayHolidaysDialog(options, num){
         generateCalendar( options);
     }
 }
+
 /****  End of dialog *****/
 
 
 function generateCalendar(options){
 
+    /***** Set new document with prefs and colors *****/
     var myDocument = app.documents.add();
-    //app.activeDocument = myDocument;
     myDocument.name = "Pocket Calendar " + options.year;
     myDocument.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
     myDocument.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
     myDocument.documentPreferences.properties = {pageWidth: 792, pageHeight: 612};
     myDocument.colors.add({name:"Red", model: ColorModel.process, colorValue:[0,90,53,0]});
 
+    /***** Set document styles *****/
     var dayFontStyle = myDocument.paragraphStyles.add({
         name:"Day Font",
         appliedFont: app.fonts.item(options.fonts.day.index),
@@ -429,6 +436,8 @@ function generateCalendar(options){
     let myLayer = myDocument.layers.item(0);
     myLayer.name = "Calendars";
 
+    // create layer with cutting guides for each calendar
+    // just empty rectangles under everything
     var frmLayer = myDocument.layers.add({name:"Frames"});
     frmLayer.move(LocationOptions.AT_END);
     let frm = myPage.rectangles.add({
@@ -439,6 +448,9 @@ function generateCalendar(options){
     });
     frm.itemLayer = frmLayer;
     stepAndRepeatEvenly(4, 2, myDocument, myPage, frm);
+
+    //*** generating calendar ***//
+    // textFrame > yearTable > month names, month tables, (on the side) week day names tables
 
     var myTextFrame = myPage.textFrames.add({geometricBounds: ["36pt", "36pt", "300pt", "200pt"]});
     myTextFrame.textFramePreferences.autoSizingType = AutoSizingTypeEnum.HEIGHT_AND_WIDTH;
@@ -451,16 +463,18 @@ function generateCalendar(options){
         columnCount : 5
     });
 
+    // Since it's not always possible to calculate the minimal width of the words
+    // Measuring samples to avoid the text beinf hidden due to overflows
     let weekList = getWeekDayNames(options);
     let weekW = measureColMinW(weekTableStyle, weekList, yearTable.cells.item(0));
     options.year_table.colsW.week = (options.year_table.colsW.week < weekW) ? weekW : options.year_table.colsW.week;
-
 
     let numW = measureColMinW(moTableStyle, ['1','2','3','4','5','6','7','8','9','0'], yearTable.cells.item(0));
     let num2W = measureColMinW(moTableStyle, ['24', '30'], yearTable.cells.item(0));
     options.daysNarrowCol = numW;
     options.daysCol = num2W;
 
+    // placing week day names tables into side columns
     [0,4].forEach((col)=>{
         [1,3,6,8].forEach((row)=>{
             let weekCell = yearTable.columns.item(col).cells.item(row);
@@ -476,9 +490,10 @@ function generateCalendar(options){
         });
     });
 
-    var d= new Date(options.year, 0, 1);
+    var d = new Date(options.year, 0, 1);
     const holidays = federalHolidaysYear(options.year, options.holidayFile);
 
+    // filling each month
     while (d.getFullYear() == options.year) {
         let mo = d.getMonth();
         let moName = d.toLocaleString(options.locale, { month: 'long' });
@@ -550,28 +565,44 @@ function generateCalendar(options){
     updateTableColsRows(options.year_table, yearTable);
     // Doing merge here to avoid cell index recalculation while making the table 
     yearTable.rows.item(4).cells.item(0).merge(yearTable.rows.item(4).cells.item(4));
+
     let middleCell = yearTable.rows.item(4).cells.item(0);
     middleCell.appliedCellStyle = middleCellStyle;
     middleCell.contents = options.year.toString();
-
-    app.waitForAllTasks();
-
+    //*** end of generating calendar ***//
+    
+    // multiply and place into printing position
     stepAndRepeatEvenly(4,2, myDocument, myPage, myTextFrame);
 
-    let myBackPage = myDocument.pages.add();
-    let imgLayer = myDocument.layers.add({name:"Images"});
-    let errMargin = 4;
+    makeBackPage({
+        doc: myDocument, 
+        imgPath: "C:\\Users\\Ooo\\Desktop\\Rabbit_year_calendar.png", 
+        nx: 4, 
+        ny: 2, 
+        cardW: 156, 
+        cardH: 245, 
+        errMargin: 4
+    });
+}
+
+function makeBackPage(attr){
+    let {doc, imgPath, nx, ny, cardW, cardH, errMargin} = {...attr};
+    
+    let myBackPage = doc.pages.add();
+    let imgLayer = doc.layers.add({name:"Images"});
 
     let imgFrm = myBackPage.rectangles.add({
         strokeWeight: 0.25, 
-        fillColor: myDocument.swatches.item('None'),
-        strokeColor: myDocument.swatches.item('Black'),
-        geometricBounds: [0, 0, 245 + errMargin, 156 + errMargin]
+        fillColor: doc.swatches.item('None'),
+        strokeColor: doc.swatches.item('Black'),
+        geometricBounds: [0, 0, cardH + errMargin, cardW + errMargin]
     });
     imgFrm.itemLayer = imgLayer;
 
-    // imgFrm.place("C:\\Users\\Ooo\\Desktop\\Rabbit_year_calendar.png");
-    stepAndRepeatEvenly(4, 2, myDocument, myBackPage, imgFrm);
+    imgFrm.place(imgPath);
+    imgFrm.fit(FitOptions.proportionally);
+    imgFrm.fit(FitOptions.centerContent);
+    stepAndRepeatEvenly(nx, ny, doc, myBackPage, imgFrm);
 }
 
 
@@ -579,11 +610,6 @@ function generateCalendar(options){
 
 function stepAndRepeatEvenly(nx, ny, doc, pg, inst){
     if(0 == nx || 0 == ny){ console.log("Error: function StepAndRepeatEvenly got 0 in argumens.");}
-    // doc.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
-    // doc.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
-    // var myOldRulerOrigin = doc.viewPreferences.rulerOrigin;
-    // app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.pageOrigin;
-    // app.activeDocument.zeroPoint = [0,0];
 
     let instBox = inst.geometricBounds;
     let instW = instBox[3] - instBox[1];
@@ -600,29 +626,6 @@ function stepAndRepeatEvenly(nx, ny, doc, pg, inst){
     for(let i=1; i<nx*ny; i++){
         inst.duplicate().move([pgMarginPrefs.left + wGap/2 + i%nx*(instW+wGap), pgMarginPrefs.top + Math.floor(i/nx)*(instH + hGap) + hGap/2]);
     }
-}
-
-function getWeekDayNames(attr){
-    let {locale, weekBeginsAtMonday, weekDayShrotness} = {...attr};
-    let firstDayStr = weekBeginsAtMonday ? "01/01/1973" : "07/01/1973";
-    var wkD = new Date(firstDayStr);
-    var week = [];
-    for( let i=0; i<7; i++){
-        let wrd = wkD.toLocaleDateString(locale, { weekday: weekDayShrotness }); 
-        wrd = wrd.charAt(0).toUpperCase() +  (wrd.length > 1? wrd.slice(1) : '');
-        week.push(wrd);
-        wkD.setDate(wkD.getDate() + 1);
-    }
-    return week;
-}
-function getMonthNames(attr){
-    let d = new Date("01/01/1973");
-    let months = [];
-    for( let i=0; i<12; i++){
-        months.push(d.toLocaleString(attr.locale, { month: 'long' }));
-        d.setDate(d.getDate() + 30);
-    }
-    return months;
 }
 
 function updateTableColsRows(opt,tbl){
@@ -658,11 +661,6 @@ function measureColMinW(tblStyle, textLines, doc){
         width: 2*maxLineLen*fontSize + rightInset + leftInset 
     });
 
-    // everyItem () Returns every Cell in the collection
-    // getElements () Resolves the object specifier, creating an array of object references.
-    // so basically .everyItem().getElements() turns collection into an array
-    // https://community.adobe.com/t5/indesign-discussions/adjust-column-width-in-tables/m-p/6631680
-
     let minColW = tbl.columns.item(0).cells.everyItem().getElements()
         .flatMap(st=>st.lines.everyItem().getElements().map(ln => ln.endHorizontalOffset -ln.horizontalOffset))
         .reduce( (len1,len2) => Math.max(len1, len2),0);
@@ -670,7 +668,7 @@ function measureColMinW(tblStyle, textLines, doc){
     return minColW  + rightInset + leftInset; 
 }
 
-
+/**** Date Functions *****/
 
 function federalHolidaysYear(year, holidayFile){
     /* Month counts from 0, week counts from Sunday 0, week day number in the month also from 0 */
@@ -694,6 +692,28 @@ function federalHolidaysYear(year, holidayFile){
     return months;
 }
 
+function getWeekDayNames(attr){
+    let {locale, weekBeginsAtMonday, weekDayShrotness} = {...attr};
+    let firstDayStr = weekBeginsAtMonday ? "01/01/1973" : "07/01/1973";
+    var wkD = new Date(firstDayStr);
+    var week = [];
+    for( let i=0; i<7; i++){
+        let wrd = wkD.toLocaleDateString(locale, { weekday: weekDayShrotness }); 
+        wrd = wrd.charAt(0).toUpperCase() +  (wrd.length > 1? wrd.slice(1) : '');
+        week.push(wrd);
+        wkD.setDate(wkD.getDate() + 1);
+    }
+    return week;
+}
+function getMonthNames(attr){
+    let d = new Date("01/01/1973");
+    let months = [];
+    for( let i=0; i<12; i++){
+        months.push(d.toLocaleString(attr.locale, { month: 'long' }));
+        d.setDate(d.getDate() + 30);
+    }
+    return months;
+}
 
 // https://stackoverflow.com/questions/1284314/easter-date-in-javascript
 // Using the 'Laurent Longre' Algorithm
@@ -713,21 +733,7 @@ function easterDateLLongre(Y) {
     return [Y, M, D];
 }
 
-function alert(msg) {
-    let theDialog = app.dialogs.add();
-    let col = theDialog.dialogColumns.add();
-    let colText = col.staticTexts.add();
-    colText.staticLabel = "" + msg;
-    theDialog.canCancel = false;
-    theDialog.show();
-    theDialog.destroy();
-    return;
-}
-function dumpVars(vrs){
-    vrs.forEach(vr =>{
-        console.log(">" + JSON.stringify(vr, null, 4));
-    });
-}
+/****  OS Functions *****/
 
 function getLocalPath(){
     let scriptPath = app.activeScript;
@@ -743,4 +749,23 @@ function readJsonFile(fileName){
     let jsonFileContent = fs.readFileSync(fileName, {encoding: "utf-8"});
     let meData = JSON.parse(jsonFileContent);
     return meData;
+}
+
+/****  Debugging Functions *****/
+
+function alert(msg) {
+    let theDialog = app.dialogs.add();
+    let col = theDialog.dialogColumns.add();
+    let colText = col.staticTexts.add();
+    colText.staticLabel = "" + msg;
+    theDialog.canCancel = false;
+    theDialog.show();
+    theDialog.destroy();
+    return;
+}
+
+function dumpVars(vrs){
+    vrs.forEach(vr =>{
+        console.log(">" + JSON.stringify(vr, null, 4));
+    });
 }
