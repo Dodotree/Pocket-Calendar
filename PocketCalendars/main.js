@@ -1,5 +1,5 @@
 const { entrypoints } = require("uxp");
-const { app, ColorModel, LocationOptions, MeasurementUnits, Justification, FirstBaseline,  VerticalJustification, AutoSizingTypeEnum, AutoSizingReferenceEnum, RulerOrigin } = require("indesign");
+const { app, ColorModel, LocationOptions, FitOptions, MeasurementUnits, Justification, FirstBaseline,  VerticalJustification, AutoSizingTypeEnum, AutoSizingReferenceEnum, RulerOrigin } = require("indesign");
 const fs = require('fs');
 
 var defaultOptions = {
@@ -582,15 +582,15 @@ generateCalendar = (options) => {
   // clone and place copies into printing position
   stepAndRepeatEvenly(4, 2, options.calendarsPerPage, myDocument, myPage, myTextFrame);
 
-  // makeBackPage({
-  //     doc: myDocument, 
-  //     imgPath: "C:\\Users\\Ooo\\Desktop\\Rabbit_year_calendar.png", 
-  //     nx: 4, 
-  //     ny: 2, 
-  //     cardW: 156, 
-  //     cardH: 245, 
-  //     errMargin: 4
-  // });
+  makeBackPage({
+      doc: myDocument, 
+      imgPath: "plugin:regal.jpeg", 
+      nx: 4, 
+      ny: 2, 
+      cardW: 156, 
+      cardH: 245, 
+      errMargin: 4
+  });
 }
 
 makeBackPage = (attr) => {

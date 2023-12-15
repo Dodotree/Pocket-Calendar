@@ -57,7 +57,7 @@ To merge cells in the table row was enough to merge both ends:
 yearTable.rows.item(4).cells.item(0).merge( yearTable.rows.item(4).cells.item(4) );
 ```
 
-`.place(path-to-img)` does not work outside of the `await`. Asynchronous functions and async/await pattern gone wrong demonstrate itself with infinite load sign. But if you tru to close file and then press "cancel" in pop up, it breaks from the await loop. Wrap main function in promice to fix this. 
+`.place(path-to-img)` does not work outside the `await`. Asynchronous functions and async/await pattern gone wrong demonstrate itself with infinite load sign. But if you try to close file and then press "cancel" in pop up, it breaks from the await loop. Wrap main function in promise to fix this. 
 
 ```sh
 await main();
