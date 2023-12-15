@@ -1,0 +1,18 @@
+[
+    {"name": "Neujahrstag, New Year's Day", "fixed": true, "mo": 0, "date": 1},
+    {"name": "Heilige Drei Könige, Epiphany", "fixed": true, "mo": 0, "date": 1},
+    {"name": "Frauentag, Women's day", "fixed": true, "mo": 2, "date": 8},
+    {"name": "Karfreitag, Good Friday", "fixed": false, "easter": -2},
+    {"name": "Ostermontag, Easter Monday", "fixed": false, "easter": 1},
+    {"name": "Tag der Arbeit, May 1st", "fixed": true, "mo": 4, "date": 1},
+    {"name": "Christi Himmelfahrt, Ascension", "fixed": false, "easter": 39},
+    {"name": "Pfingstmontag, Whit Monday", "fixed": false, "easter": 50},
+    {"name": "Fronleichnam, Corpus Christi", "fixed": false, "easter": 60},
+    {"name": "Mariä Himmelfahrt, Assumption Day", "fixed": true, "mo": 7, "date": 15 },
+    {"name": "Weltkindertag, World Children's Day", "fixed": true, "mo": 8, "date": 20 },
+    {"name": "Tag der Deutschen Einheit, German Unity Day", "fixed": true, "mo": 9, "date": 3 },
+    {"name": "Reformationstag, Reformation Day", "fixed": true, "mo": 9, "date": 31 },
+    {"name": "Allerheiligen, All Saints' Day", "fixed": true, "mo": 10, "date": 1 },
+    {"name": "Weihnachtstag, Christmas Day", "fixed": true, "mo": 11, "date": 25 },
+    {"name": "Zweiter Weihnachtsfeiertag, Boxing day", "fixed": true, "mo": 11, "date": 26 }
+]

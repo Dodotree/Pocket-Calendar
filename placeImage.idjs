@@ -1,0 +1,9 @@
+const myDocument = app.activeDocument;    
+const imagePath = "C:\\Users\\Ooo\\Desktop\\Capture11.JPG";
+const imageFrame = myDocument.rectangles.add({
+    geometricBounds: ["36px", "36px", "260px", "180px"],
+    strokeWeight: 0,
+    strokeColor: myDocument.swatches.item('None')
+});
+await imageFrame.place(imagePath);
+

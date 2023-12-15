@@ -1,0 +1,10 @@
+[
+    {"name": "New Year's Day", "fixed": true, "mo": 0, "date": 1},
+    {"name": "March 8", "fixed": true, "mo": 2, "date": 8},
+    {"name": "May 1st", "fixed": true, "mo": 4, "date": 1},
+    {"name": "Victory day", "fixed": true, "mo": 4, "date": 9},
+    {"name": "Constitution Day", "fixed": true, "mo": 6, "date": 28 },
+    {"name": "Independence Day", "fixed": true, "mo": 7, "date": 24 },
+    {"name": "Veterans Day", "fixed": true, "mo": 9, "date": 14 },
+    {"name": "Christmas Day", "fixed": true, "mo": 11, "date": 25 }
+]

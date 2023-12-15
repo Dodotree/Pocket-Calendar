@@ -1,0 +1,8 @@
+[
+    {"name": "New Year's Day", "fixed": true, "mo": 0, "date": 1},
+    {"name": "Christmas Day", "fixed": true, "mo": 0, "date": 7},
+    {"name": "March 8", "fixed": true, "mo": 2, "date": 8},
+    {"name": "May 1st", "fixed": true, "mo": 4, "date": 1},
+    {"name": "Victory day", "fixed": true, "mo": 4, "date": 9},
+    {"name": "November holiday", "fixed": true, "mo": 10, "date": 4}
+]

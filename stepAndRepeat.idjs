@@ -1,0 +1,26 @@
+function stepAndRepeatEvenly(nx, ny, doc, pg, inst){
+    if(0 == nx || 0 == ny){ console.log("Error: function StepAndRepeatEvenly got 0 in argumens.");}
+ 
+    // in case you need to change those settings and restore them afterwards
+    // doc.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
+    // doc.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
+    // var myOldRulerOrigin = doc.viewPreferences.rulerOrigin;
+    // app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.pageOrigin;
+    // app.activeDocument.zeroPoint = [0,0];
+
+    let instBox = inst.geometricBounds;
+    let instW = instBox[3] - instBox[1];
+    let instH = instBox[2] - instBox[0];
+    let pgH = doc.documentPreferences.pageHeight;
+    let pgW = doc.documentPreferences.pageWidth;
+    let pgMarginPrefs = pg.marginPreferences;
+    let wGap = (pgW - nx*instW - (pgMarginPrefs.left + pgMarginPrefs.right))/nx;
+    let hGap = (pgH - ny*instH - (pgMarginPrefs.top + pgMarginPrefs.bottom))/ny;
+
+    console.log(pgH, pgW, instW, instH, JSON.stringify(pgMarginPrefs.getElements()), wGap, hGap);
+
+    inst.move([pgMarginPrefs.left + wGap/2, pgMarginPrefs.top + hGap/2]);
+    for(let i=1; i<nx*ny; i++){
+        inst.duplicate().move([pgMarginPrefs.left + wGap/2 + i%nx*(instW+wGap), pgMarginPrefs.top + Math.floor(i/nx)*(instH + hGap) + hGap/2]);
+    }
+}
